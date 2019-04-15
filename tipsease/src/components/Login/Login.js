@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import { Route, Link } from "react-router-dom";
 import axios from "axios";
 import users from "./users";
-// import Register from '../Register/Register';
+import Register from '../Register/Register';
 
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
@@ -75,13 +75,13 @@ export class Login extends React.Component {
         </form>
         <Link
           to={{
-            pathname: "/register",
+            pathname: "../Register/Register",
             state: { users: this.state.users }
           }}
         >
           REGISTER
         </Link>
-        <Route exact path="/register" />
+        <Route exact path="/register" component={Register}/>
       </div>
     );
   }
