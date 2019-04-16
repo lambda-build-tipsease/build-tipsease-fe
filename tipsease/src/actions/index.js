@@ -93,7 +93,7 @@ export const getCustomers = () => dispatch => {
   export const addCustomers = users => dispatch => {
     dispatch({ type: ADDING_CUSTOMER });
     axios
-      .post("https://buildtipease.herokuapp.com//auth/users/register", users)
+      .post("https://buildtipease.herokuapp.com/auth/users/register", users)
       .then(res => {
         dispatch({ type: ADDING_SERVICE_WORKER_SUCCESS, payload: res.data });
       })

@@ -16,7 +16,7 @@ export class Login extends React.Component {
   state = {
     username: '',
     password: '',
-    type: ''
+    type: 'users'
   };
 
 
@@ -27,10 +27,11 @@ export class Login extends React.Component {
 
   handleSubmit = e =>{
     e.preventDefault()
-    axios 
-        .post('https://buildtipease.herokuapp.com/auth/user/login', {
+    console.log("CLG THE STATE",this.state)
+        axios.post('https://buildtipease.herokuapp.com/auth/users/login', {
             username: this.state.username,
-            password: this.state.password
+            password: this.state.password,
+            type: this.state.type
         })
         .then(res => {
             console.log(res)
@@ -41,14 +42,14 @@ export class Login extends React.Component {
             localStorage.setItem('type', type)
             console.log(token)
             this.props.history.push('/Protected')
-            axios
-                .post('https://buildtipease.herokuapp.com/auth/users', {headers: {Authorization: token}} )
-                .then(res => {
-                    console.log(res.data.token); 
-                    }
-                    )
-                .catch(err=> console.log(err))
-        })
+            // axios
+            //     .post('https://buildtipease.herokuapp.com/auth/users', {headers: {Authorization: token}} )
+            //     .then(res => {
+            //         console.log(res.data.token); 
+            //         }
+            //         )
+            //     .catch(err=> console.log(err))
+        }).catch(err => console.log(err))
 }
 
 
@@ -72,11 +73,11 @@ export class Login extends React.Component {
             <form className="ui form" onSubmit={this.handleSubmit}>
               <div className="field">
                 <label>User</label>
-                <input type="text" name="user" placeholder="User" onChange={this.handleChanges}/>
+                <input type="text" name="username" placeholder="User" onChange={this.handleChanges} value={this.state.username}/>
               </div>
               <div className="field">
                 <label>Password</label>
-                <input type="password" name="pass" placeholder="Password" onChange={this.handleChanges}/>
+                <input type="password" name="password" placeholder="Password" onChange={this.handleChanges} value={this.state.password}/>
               </div>
               <div className="inline fields">
               <div className="field">
