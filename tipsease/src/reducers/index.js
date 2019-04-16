@@ -35,7 +35,7 @@ const initialState = {
     type: ''
   }
   
-  const staff = (state = initialState, action) => {
+  const serviceWorker = (state = initialState, action) => {
     switch(action.type) {
       case FETCHING_SERVICE_WORKER_SUCCESS:
         return {
@@ -85,4 +85,4 @@ const initialState = {
     }
   }
   
-  export default staff
+  export default serviceWorker

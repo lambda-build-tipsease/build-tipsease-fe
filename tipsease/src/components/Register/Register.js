@@ -2,29 +2,53 @@ import React from 'react';
 import axios from 'axios';
 
 class Register extends React.Component {
-    // state = {
-    //     full_name='',
-    //     username='',
-    //     password='',
-    //     type='',
-    //     photoUrl=''
-    // }
 
+    state = {
+        fullName: '',
+        username: '',
+        password: '',
+        type: '',
+        // photoUrl: ''
+    }
+
+    //url https://buildtipease.herokuapp.com
+    handleChanges = e => {
+        this.setState({[e.target.name]: e.target.value})
+      }
+    
+      handleSignup = event => {
+      event.preventDefault();
+      console.log("STATE", this.state)
+      axios
+        .post('https://buildtipease.herokuapp.com/auth/users/register', {
+          fullName: this.state.fullName,
+          username: this.state.username,
+          password: this.state.password,
+          type: this.state.type,
+        })
+        .then(res => {
+          localStorage.setItem('token', res.data.token);
+          console.log("it worked", res.data)
+    
+          this.props.history.push("/protected");
+        })
+        .catch(err => this.setState({ errorMsg: 'ERROR: This username is already in use' }));
+      };
 
     render() {
         return (
             <div className="ui container">
-            <form className="ui form">
+            <form className="ui form" onSubmit={this.handleSignup}>
   <h4 className="ui dividing header">Personal Information</h4>
   <div className="two fields">
     <div className="field">
       <label>Name</label>
       <div className="two fields">
         <div className="field">
-          <input type="text" name="first-name" placeholder="First Name"/>
+          <input type="text" name="first-name" placeholder="First Name" onChange={this.handleChanges}/>
         </div>
         <div className="field">
-          <input type="text" name="last-name" placeholder="Last Name"/>
+          <input type="text" name="last-name" placeholder="Last Name" onChange={this.handleChanges}/>
         </div>
       </div>
     </div>
@@ -111,14 +135,14 @@ class Register extends React.Component {
     <div className="required field">
       <label>Username</label>
       <div className="ui icon input">
-        <input type="text" placeholder="Username" />
+        <input type="text" placeholder="Username" onChange={this.handleChanges}/>
         <i className="user icon"></i>
       </div>
     </div>
     <div className="required field">
       <label>Password</label>
       <div className="ui icon input">
-        <input type="password" />
+        <input type="password" onChange={this.handleChanges}/>
         <i className="lock icon"></i>
       </div>
     </div>
@@ -128,13 +152,13 @@ class Register extends React.Component {
   <h5 className="ui header">User Type</h5>
   <div className="field">
     <div className="ui toggle checkbox">
-      <input type="radio" name="privacy"/>
+      <input type="radio" name="privacy" onChange={this.handleChanges}/>
       <label>Service Worker</label>
     </div>
   </div>
   <div className="field">
     <div className="ui toggle checkbox">
-      <input type="radio" name="privacy"/>
+      <input type="radio" name="privacy" onChange={this.handleChanges}/>
       <label>User</label>
     </div>
   </div>
@@ -149,7 +173,7 @@ class Register extends React.Component {
   <div className="ui error message">
     <div className="header">We noticed some issues</div>
   </div>
-  <div className="ui submit button">Register</div>
+  <div className="ui submit button" onClick={this.handleSignup}>Register</div>
 </form>
 </div>       
           
