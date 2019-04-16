@@ -36,8 +36,9 @@ export const GET_TYPE_ERROR = "GET_TYPE_ERROR"
 export const getServiceWorkers = () => dispatch => {
     dispatch({ type: FETCHING_SERVICE_WORKER });
     axios
-      .get("https://buildtipease.herokuapp.com/auth/serviceWorkers")
+      .get("https://buildtipease.herokuapp.com/auth/serviceWorkers:")
       .then(res => {
+        console.log('RES DATA LOGIN RESPONSE:', res);
         dispatch({ type: FETCHING_SERVICE_WORKER_SUCCESS, payload: res.data });
       })
       .catch(err => {
@@ -51,6 +52,7 @@ export const getServiceWorkers = () => dispatch => {
     axios
       .post("https://buildtipease.herokuapp.com/auth/serviceWorkers/register", serviceWorker)
       .then(res => {
+        console.log('RES DATA LOGIN RESPONSE:', res);
         dispatch({ type: ADDING_SERVICE_WORKER_SUCCESS, payload: res.data });
       })
       .catch(err => {
@@ -91,7 +93,7 @@ export const getCustomers = () => dispatch => {
   export const addCustomers = users => dispatch => {
     dispatch({ type: ADDING_CUSTOMER });
     axios
-      .post("https://buildtipease.herokuapp.com/auth/serviceWorkers/register", users)
+      .post("https://buildtipease.herokuapp.com//auth/users/register", users)
       .then(res => {
         dispatch({ type: ADDING_SERVICE_WORKER_SUCCESS, payload: res.data });
       })

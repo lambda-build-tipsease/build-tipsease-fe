@@ -1,23 +1,12 @@
 import React from "react";
-import { withRouter } from "react-router";
+// import {connect} from 'react-redux'
+// import { withRouter } from "react-router";
 import { Route, Link } from "react-router-dom";
 import axios from "axios";
-import users from "./users";
-import Register from '../Register/Register';
+// import users from "./users";
+// import Register from '../Register/Register';
 
-// import PropTypes from "prop-types";
-// import Avatar from "@material-ui/core/Avatar";
-// import Button from "@material-ui/core/Button";
-// import CssBaseline from "@material-ui/core/CssBaseline";
-// import FormControl from "@material-ui/core/FormControl";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
-// import Checkbox from "@material-ui/core/Checkbox";
-// import Input from "@material-ui/core/Input";
-// import InputLabel from "@material-ui/core/InputLabel";
-// import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-// import Paper from "@material-ui/core/Paper";
-// import Typography from "@material-ui/core/Typography";
-// import withStyles from "@material-ui/core/styles/withStyles";
+
 
 const loginpageStyle = {
   marginTop: '50px',
@@ -26,7 +15,8 @@ const loginpageStyle = {
 export class Login extends React.Component {
   state = {
     username: '',
-    password: ''
+    password: '',
+    type: ''
   };
 
 
@@ -44,16 +34,17 @@ export class Login extends React.Component {
         })
         .then(res => {
             console.log(res)
-            const {token, username, userId} = res.data
+            const {token, username, password,type} = res.data
             localStorage.setItem('token', token)
             localStorage.setItem('username', username)
-            localStorage.setItem('userId', userId)
+            localStorage.setItem('password', password)
+            localStorage.setItem('type', type)
             console.log(token)
-            this.props.history.push('/Posts')
+            this.props.history.push('/Protected')
             axios
-                .get('https://buildtipease.herokuapp.com/auth/users', {headers: {Authorization: token}} )
+                .post('https://buildtipease.herokuapp.com/auth/users', {headers: {Authorization: token}} )
                 .then(res => {
-                    console.log(res); 
+                    console.log(res.data.token); 
                     }
                     )
                 .catch(err=> console.log(err))
@@ -87,6 +78,20 @@ export class Login extends React.Component {
                 <label>Password</label>
                 <input type="password" name="pass" placeholder="Password" onChange={this.handleChanges}/>
               </div>
+              <div className="inline fields">
+              <div className="field">
+                <div className="ui radio checkbox">
+                  <input type="radio" name="example2" checked="checked" />
+                  <label>User</label>
+                </div>
+              </div>
+              <div className="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="example2" />
+                  <label>Service Worker</label>
+                </div>
+              </div>
+            </div>
               <button className="ui primary labeled icon button" type="submit">
                 <i className="unlock alternate icon"></i>
                 Login
@@ -95,6 +100,8 @@ export class Login extends React.Component {
                 <i className="edit outline icon"></i>
                 <Link to={{pathname: "../Register/Register"}} style={{ color: '#FFF' }}>Register</Link>
               </button>
+              
+
             </form>
             </div>
           </div>
