@@ -1,11 +1,11 @@
-# Disney Parents Frontend
+# Tipsease Frontend
 
 - By Alan Perez
 
 ## Tech Used
 
 - ReactJS
-- Material UI
+- Semantic UI
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
