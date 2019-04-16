@@ -7,7 +7,7 @@
 
 [build]
   base    = "tipsease"
-  command = "yarn start"
+  command = "yarn run build"
   
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
