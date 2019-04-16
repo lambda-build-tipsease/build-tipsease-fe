@@ -2,30 +2,56 @@ import React from 'react';
 import axios from 'axios';
 
 class Register extends React.Component {
-    // state = {
-    //     full_name='',
-    //     username='',
-    //     password='',
-    //     type='',
-    //     photoUrl=''
-    // }
 
+    state = {
+        fullName: '',
+        username: '',
+        password: '',
+        photoUrl: 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.w3schools.com%2Fhowto%2Fimg_avatar.png&imgrefurl=https%3A%2F%2Fwww.w3schools.com%2Fhowto%2Fhowto_css_image_avatar.asp&docid=IN--qpeX1hje-M&tbnid=Jjq5a5o5G80fpM%3A&vet=10ahUKEwi-iNv6gtXhAhUIZKwKHYDoBl0QMwhhKAAwAA..i&w=499&h=498&bih=839&biw=871&q=avatar%20img&ved=0ahUKEwi-iNv6gtXhAhUIZKwKHYDoBl0QMwhhKAAwAA&iact=mrc&uact=8',
+        // serviceType: 'users',
+        // photoUrl: ''
+    }
+
+    //url https://buildtipease.herokuapp.com
+    handleChanges = e => {
+        this.setState({[e.target.name]: e.target.value})
+      }
+    
+      handleSignup = event => {
+      event.preventDefault();
+      console.log("STATE", this.state)
+      axios
+        .post('https://buildtipease.herokuapp.com/auth/users/register', {
+          fullName: this.state.fullName,
+          username: this.state.username,
+          password: this.state.password,
+          // serviceType: this.state.serviceType,
+          photoUrl: this.state.photoUrl
+        })
+        .then(res => {
+          // localStorage.setItem('token', res.data.token);
+          console.log("it worked", res.data)
+    
+          // this.props.history.push("/protected");
+        })
+        .catch(err => this.setState({ errorMsg: 'ERROR: This username is already in use' }));
+      };
 
     render() {
         return (
             <div className="ui container">
-            <form className="ui form">
+            <form className="ui form" onSubmit={this.handleSignup}>
   <h4 className="ui dividing header">Personal Information</h4>
   <div className="two fields">
     <div className="field">
       <label>Name</label>
       <div className="two fields">
         <div className="field">
-          <input type="text" name="first-name" placeholder="First Name"/>
+          <input type="text" name="fullName" placeholder="Full Name" onChange={this.handleChanges} value={this.state.fullName}/>
         </div>
-        <div className="field">
-          <input type="text" name="last-name" placeholder="Last Name"/>
-        </div>
+        {/* <div className="field">
+          <input type="text" name="last-name" placeholder="Last Name" onChange={this.handleChanges}/>
+        </div> */}
       </div>
     </div>
     <div className="field">
@@ -111,14 +137,14 @@ class Register extends React.Component {
     <div className="required field">
       <label>Username</label>
       <div className="ui icon input">
-        <input type="text" placeholder="Username" />
+        <input type="text" name="username" placeholder="username" onChange={this.handleChanges} value={this.state.username}/>
         <i className="user icon"></i>
       </div>
     </div>
     <div className="required field">
       <label>Password</label>
       <div className="ui icon input">
-        <input type="password" />
+        <input type="password" onChange={this.handleChanges} name="password" value={this.state.password}/>
         <i className="lock icon"></i>
       </div>
     </div>
@@ -128,13 +154,13 @@ class Register extends React.Component {
   <h5 className="ui header">User Type</h5>
   <div className="field">
     <div className="ui toggle checkbox">
-      <input type="radio" name="privacy"/>
+      <input type="radio" onChange={this.handleChanges}/>
       <label>Service Worker</label>
     </div>
   </div>
   <div className="field">
     <div className="ui toggle checkbox">
-      <input type="radio" name="privacy"/>
+      <input type="radio" onChange={this.handleChanges}/>
       <label>User</label>
     </div>
   </div>
@@ -149,7 +175,7 @@ class Register extends React.Component {
   <div className="ui error message">
     <div className="header">We noticed some issues</div>
   </div>
-  <div className="ui submit button">Register</div>
+  <div className="ui submit button" onClick={this.handleSignup}>Register</div>
 </form>
 </div>       
           
