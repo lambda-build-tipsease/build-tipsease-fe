@@ -25,14 +25,15 @@ class Register extends React.Component {
         })
         .then(res => {
           // localStorage.setItem('token', res.data.token);
-          console.log("it worked", res.data)
+          console.log("SERVICE WORKER WORKED:", res.data)
     
           // this.props.history.push("/protected");
         })
         .catch(err => this.setState({ errorMsg: 'ERROR: This username is already in use' }));
     }
-
+    
     toggleCheck = e => {
+      console.log("TOGGLE CHECK")
       this.setState((state) => {
         return {serviceWorker: !state.serviceWorker}
       })
@@ -42,27 +43,55 @@ class Register extends React.Component {
     //url https://buildtipease.herokuapp.com
     handleChanges = e => {
         this.setState({[e.target.name]: e.target.value})
-      }
+      };
     
       handleSignup = event => {
       event.preventDefault();
-      console.log("STATE", this.state)
-      axios
-        .post('https://buildtipease.herokuapp.com/auth/users/register', {
-          fullName: this.state.fullName,
-          username: this.state.username,
-          password: this.state.password,
-          // serviceType: this.state.serviceType,
-          photoUrl: this.state.photoUrl
-        })
-        .then(res => {
-          // localStorage.setItem('token', res.data.token);
-          console.log("it worked", res.data)
+      const userURL = 'https://buildtipease.herokuapp.com/auth/users/register';
+      const workerURL = 'https://buildtipease.herokuapp.com/auth/serviceWorkers/register';
+      let url; 
+        if(this.state.serviceWorker) {
+            url = workerURL
+        }else {
+          url = userURL
+        }
+
+      // console.log("STATE", this.state)
+      // axios
+      //   .post('https://buildtipease.herokuapp.com/auth/users/register', {
+      //     fullName: this.state.fullName,
+      //     username: this.state.username,
+      //     password: this.state.password,
+      //     // serviceType: this.state.serviceType,
+      //     photoUrl: this.state.photoUrl
+      //   })
+      //   .then(res => {
+      //     // localStorage.setItem('token', res.data.token);
+      //     console.log("it worked", res.data)
     
-          // this.props.history.push("/protected");
-        })
-        .catch(err => this.setState({ errorMsg: 'ERROR: This username is already in use' }));
+      //     // this.props.history.push("/protected");
+      //   })
+      //   .catch(err => this.setState({ errorMsg: 'ERROR: This username is already in use' }));
       };
+
+
+      registerALL= (workerLink) => {
+          axios.post(workerLink), {
+            fullName: this.state.fullName,
+            username: this.state.username,
+            password: this.state.password,
+            // serviceType: this.state.serviceType,
+            photoUrl: this.state.photoUrl
+          }
+          .then(res => {
+            // localStorage.setItem('token', res.data.token);
+            console.log("it worked", res.data)
+      
+            // this.props.history.push("/protected");
+          })
+          .catch(err => this.setState({ errorMsg: 'ERROR: This username is already in use' }));
+      };
+    
 
     render() {
         return (
@@ -181,13 +210,13 @@ class Register extends React.Component {
   <h5 className="ui header">User Type</h5>
   <div className="field">
     <div className="ui toggle checkbox">
-      <input type="radio" onChange={this.state.toggleCheck} checked={this.state.serviceWorker}/>
+      <input type="radio" onChange={this.toggleCheck} checked={this.state.serviceWorker} defaultChecked />
       <label>Service Worker</label>
     </div>
   </div>
   <div className="field">
     <div className="ui toggle checkbox">
-      <input type="radio" onChange={this.state.toggleCheck} checked={!this.state.serviceWorker}/>
+      <input type="radio" onChange={this.toggleCheck} checked={!this.state.serviceWorker} />
       <label>User</label>
     </div>
   </div>
