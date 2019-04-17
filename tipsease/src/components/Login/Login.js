@@ -3,6 +3,7 @@ import React from "react";
 // import { withRouter } from "react-router";
 import { Route, Link } from "react-router-dom";
 import axios from "axios";
+import Home from '../container/Home'
 // import users from "./users";
 // import Register from '../Register/Register';
 
@@ -41,7 +42,7 @@ export class Login extends React.Component {
             localStorage.setItem('password', password)
             localStorage.setItem('type', type)
             console.log(token)
-            this.props.history.push('/Protected')
+            this.props.history.push('/Home')
             // axios
             //     .post('https://buildtipease.herokuapp.com/auth/users', {headers: {Authorization: token}} )
             //     .then(res => {

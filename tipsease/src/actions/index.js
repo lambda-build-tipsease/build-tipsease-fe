@@ -77,10 +77,10 @@ export const getServiceWorkers = () => dispatch => {
 //   CUSTOMERS
 
 //GETS CUSTOMERS
-export const getCustomers = () => dispatch => {
+export const getCustomers = id => dispatch => {
     dispatch({ type: FETCHING_CUSTOMER });
     axios
-      .get("https://buildtipease.herokuapp.com/auth/users")
+      .get(`https://buildtipease.herokuapp.com/users/${id}`)
       .then(res => {
         dispatch({ type: FETCHING_CUSTOMER_SUCCESS, payload: res.data });
       })
