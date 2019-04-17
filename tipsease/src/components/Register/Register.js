@@ -8,9 +8,36 @@ class Register extends React.Component {
         username: '',
         password: '',
         photoUrl: 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.w3schools.com%2Fhowto%2Fimg_avatar.png&imgrefurl=https%3A%2F%2Fwww.w3schools.com%2Fhowto%2Fhowto_css_image_avatar.asp&docid=IN--qpeX1hje-M&tbnid=Jjq5a5o5G80fpM%3A&vet=10ahUKEwi-iNv6gtXhAhUIZKwKHYDoBl0QMwhhKAAwAA..i&w=499&h=498&bih=839&biw=871&q=avatar%20img&ved=0ahUKEwi-iNv6gtXhAhUIZKwKHYDoBl0QMwhhKAAwAA&iact=mrc&uact=8',
-        // serviceType: 'users',
+        serviceWorker: true
         // photoUrl: ''
     }
+
+    serviceWorker = event => { 
+      event.preventDefault();
+      console.log("STATE", this.state)
+      axios
+        .post('https://buildtipease.herokuapp.com/auth/serviceWorkers/register', {
+          fullName: this.state.fullName,
+          username: this.state.username,
+          password: this.state.password,
+          // serviceType: this.state.serviceType,
+          photoUrl: this.state.photoUrl
+        })
+        .then(res => {
+          // localStorage.setItem('token', res.data.token);
+          console.log("it worked", res.data)
+    
+          // this.props.history.push("/protected");
+        })
+        .catch(err => this.setState({ errorMsg: 'ERROR: This username is already in use' }));
+    }
+
+    toggleCheck = e => {
+      this.setState((state) => {
+        return {serviceWorker: !state.serviceWorker}
+      })
+    }
+
 
     //url https://buildtipease.herokuapp.com
     handleChanges = e => {
@@ -154,13 +181,13 @@ class Register extends React.Component {
   <h5 className="ui header">User Type</h5>
   <div className="field">
     <div className="ui toggle checkbox">
-      <input type="radio" onChange={this.handleChanges}/>
+      <input type="radio" onChange={this.state.toggleCheck} checked={this.state.serviceWorker}/>
       <label>Service Worker</label>
     </div>
   </div>
   <div className="field">
     <div className="ui toggle checkbox">
-      <input type="radio" onChange={this.handleChanges}/>
+      <input type="radio" onChange={this.state.toggleCheck} checked={!this.state.serviceWorker}/>
       <label>User</label>
     </div>
   </div>
