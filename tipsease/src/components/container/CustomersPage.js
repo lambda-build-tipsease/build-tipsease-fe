@@ -35,8 +35,8 @@ class CustomersPage extends React.Component {
     const { workers } = this.state;
 
     return (
-      <div className="ui grid container">
-        <div className="ui segment">
+      <div className="test">
+        <div className="ui four doubling stackable cards">
           {workers.map(worker => (
             <WorkerList key={worker.id} {...worker} />
           ))}

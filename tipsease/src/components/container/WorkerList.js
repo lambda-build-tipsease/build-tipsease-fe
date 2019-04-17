@@ -6,7 +6,7 @@ import axios from 'axios';
 function WorkersList(props){
 
 return (
-    <div className="container">
+
     
     <div className="ui card">
                     <div className="image">
@@ -29,7 +29,7 @@ return (
                     </div>
                     </div>
     
-            </div>
+    
         )
     }
 
