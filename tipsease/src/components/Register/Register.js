@@ -1,6 +1,9 @@
 import React from "react";
 import axios from "axios";
 
+import { connect } from "react-redux";
+import {addServiceWorkers,addCustomers} from '../../actions';
+
 class Register extends React.Component {
   state = {
     fullName: "",
@@ -8,8 +11,8 @@ class Register extends React.Component {
     password: "",
     photoUrl:
       "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.w3schools.com%2Fhowto%2Fimg_avatar.png&imgrefurl=https%3A%2F%2Fwww.w3schools.com%2Fhowto%2Fhowto_css_image_avatar.asp&docid=IN--qpeX1hje-M&tbnid=Jjq5a5o5G80fpM%3A&vet=10ahUKEwi-iNv6gtXhAhUIZKwKHYDoBl0QMwhhKAAwAA..i&w=499&h=498&bih=839&biw=871&q=avatar%20img&ved=0ahUKEwi-iNv6gtXhAhUIZKwKHYDoBl0QMwhhKAAwAA&iact=mrc&uact=8",
-    serviceWorker: true
-    // photoUrl: ''
+    serviceWorker: true,
+    serviceType: ''
   };
 
   serviceWorker = event => {
@@ -61,7 +64,7 @@ class Register extends React.Component {
       url = userURL;
     }
 
-    this.registerALL(url,employee)
+    this.registerALL(url)
 
     // console.log("STATE", this.state)
     // axios
@@ -81,43 +84,56 @@ class Register extends React.Component {
     //   .catch(err => this.setState({ errorMsg: 'ERROR: This username is already in use' }));
   };
 
-  registerALL = (workerLink,serviceType=null) => {
+  registerALL = async (workerLink) => {
+    const {fullName,username,password,photoUrl,serviceType} = this.state;
+
+    let result;
+
     if(serviceType) {
-      axios.post(workerLink,
-        {
-          fullName: this.state.fullName,
-          username: this.state.username,
-          password: this.state.password,
-          serviceType: serviceType,
-          photoUrl: this.state.photoUrl
-        })
-          .then(res => {
-            // localStorage.setItem('token', res.data.token);
-            console.log("it worked", res.data);
+        
+      result = await this.props.addServiceWorkers({fullName,username,password,photoUrl,serviceType})
+        // localStorage.setItem('token', res.data.token);
+      // axios.post(workerLink,
+      //   {
+      //     fullName: this.state.fullName,
+      //     username: this.state.username,
+      //     password: this.state.password,
+      //     serviceType: serviceType,
+      //     photoUrl: this.state.photoUrl
+      //   })
+      //     .then(res => {
+      //       // localStorage.setItem('token', res.data.token);
+      //       console.log("it worked", res.data);
   
-            // this.props.history.push("/protected");
-          })
-          .catch(err => {
-            this.setState({ errorMsg: "ERROR: This username is already in use" })
-          });
+      //       // this.props.history.push("/protected");
+      //     })
+      //     .catch(err => {
+      //       this.setState({ errorMsg: "ERROR: This username is already in use" })
+      //     });
+
     }else {
-      axios.post(workerLink,
-        {
-          fullName: this.state.fullName,
-          username: this.state.username,
-          password: this.state.password,
-          photoUrl: this.state.photoUrl
-        })
-          .then(res => {
-            // localStorage.setItem('token', res.data.token);
-            console.log("it worked", res.data);
+
+      result = await this.props.addCustomers({fullName,username,password,photoUrl})
+        // localStorage.setItem('token', res.data.token);
+      // axios.post(workerLink,
+      //   {
+      //     fullName: this.state.fullName,
+      //     username: this.state.username,
+      //     password: this.state.password,
+      //     photoUrl: this.state.photoUrl
+      //   })
+      //     .then(res => {
+      //       // localStorage.setItem('token', res.data.token);
+      //       console.log("it worked", res.data);
   
-            // this.props.history.push("/protected");
-          })
-          .catch(err => {
-            this.setState({ errorMsg: "ERROR: This username is already in use" })
-          });
+      //       // this.props.history.push("/protected");
+      //     })
+      //     .catch(err => {
+      //       this.setState({ errorMsg: "ERROR: This username is already in use" })
+      //     });
     }
+
+    console.log(result)
 
   };
 
@@ -223,8 +239,8 @@ class Register extends React.Component {
             <div className="field" />
           </div>
           <div className="field">
-            <label>Biography</label>
-            <textarea />
+            <label>Service Type</label>
+            <textarea onChange={this.handleChanges} name="serviceType" value={this.state.serviceType}/>
           </div>
           <h4 className="ui dividing header">Account Info</h4>
           <div className="two fields">
@@ -300,4 +316,7 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default connect(
+  null,
+  { addServiceWorkers,addCustomers }
+)(Register);

@@ -5,6 +5,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import SignIn from './Login/SignIn'
 import Home from './container/Home'
 import Register from './Register/Register';
+import WorkerProfile from './container/WorkerProfile';
 class App extends React.Component {
 
 
@@ -16,11 +17,13 @@ class App extends React.Component {
             <Link to="/login" component={Login}>Login</Link>
             <Link to="/home" component={Home}>Home</Link>
             <Link to="/register" component={Register}>Register</Link>
+            <Link to="/workerprofile" component={WorkerProfile}>WorkerProfile</Link>
             </Switch>
             <Route path = "/register" component = {Register}/>
             <Route path = "/login" component = {Login}/>
             
             <Route path = "/home" component = {Home}/>
+            <Route path = "/workerprofile/:id" component = {WorkerProfile}/>
 
             </div>
         )
