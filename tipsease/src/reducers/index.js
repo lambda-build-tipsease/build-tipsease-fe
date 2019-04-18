@@ -25,7 +25,15 @@ import {
 
     GET_TYPE_START,
     GET_TYPE_SUCCESS,
-    GET_TYPE_ERROR
+    GET_TYPE_ERROR,
+
+    FETCH_WORKERS_START,
+    FETCH_WORKERS_SUCCESS,
+    FETCH_WORKERS_FAILURE,
+
+    FETCH_WORKER_START,
+    FETCH_WORKER_SUCCESS,
+    FETCH_WORKER_FAILURE
 
 } from "../actions";
 const initialState = {
@@ -35,12 +43,12 @@ const initialState = {
     type: ''
   }
   
-  const serviceWorker = (state = initialState, action) => {
+  const reducers = (state = initialState, action) => {
     switch(action.type) {
       case FETCHING_SERVICE_WORKER_SUCCESS:
         return {
           ...state,
-          staff: action.payload
+          serviceWorkers: action.payload
         }
       case FETCHING_SERVICE_WORKER_ERROR:
         return {
@@ -80,9 +88,14 @@ const initialState = {
           ...state,
           userType: action.payload,
         }
+      case FETCH_WORKER_SUCCESS:
+        return {
+          ...state,
+          serviceWorker: action.payload
+        }
       default:
         return state;
     }
   }
   
-  export default serviceWorker
+  export default reducers
