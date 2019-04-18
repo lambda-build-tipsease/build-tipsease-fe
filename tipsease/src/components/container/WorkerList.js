@@ -12,7 +12,10 @@ function WorkersList(props){
     //   this.props.history.push('/workerprofile');
       console.log("IT WAS CLICKED")
   };
-  
+
+
+
+  console.log("WORKER LIST: ",props)
 return (
 
     
@@ -35,6 +38,21 @@ return (
                         <i className="user icon"></i>
                         available
                         </a>
+                        <div>
+                        {props.single && <div>{props.bio}</div>}
+                        </div>
+                        <div>
+                        {props.single && <div>{props.tagline}</div>}
+                        </div>
+                        <div>
+                        {props.single && <div>{props.timeAtJob}</div>}
+                        </div>
+                        <div>
+                        {props.single && <div>{props.workplace}</div>}
+                        </div>
+                        <div>
+                        {props.single && <div>TIP: <input onChange={value => props.submitTip(value)}/> <button onClick={props.submitTip}> submit tip</button></div>}
+                        </div>
                     </div>
                     </div>
     

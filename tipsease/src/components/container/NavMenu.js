@@ -8,8 +8,12 @@ const colorTheme = {
 class Navmenu extends React.Component {
 
 
-    logoutHandler = e => {
-        localStorage.clear();
+    logoutHandler = async e => {
+        console.log("LOGOUT CLICKED")        
+        await localStorage.clear();
+        // window.location = `/WorkerProfile/${props.id}`;
+
+        window.location = "/login";
     }
     render() {
 

@@ -88,6 +88,11 @@ const initialState = {
           ...state,
           userType: action.payload,
         }
+      case FETCH_WORKER_SUCCESS:
+        return {
+          ...state,
+          serviceWorker: action.payload
+        }
       default:
         return state;
     }

@@ -145,9 +145,10 @@ export const getCustomers = id => dispatch => {
   };
   
   export const getWorkerProfile = (id) => (dispatch) => {
+    const token = localStorage.getItem("token");
     dispatch({ type: FETCH_WORKER_START });
     axios
-      .get(`https://buildtipease.herokuapp.com/serviceWorkers/${id}`)
+      .get(`https://buildtipease.herokuapp.com/serviceWorkers/${id}`, {headers:{authorization: token}})
       .then((res) => {
         dispatch({
           type: FETCH_WORKER_SUCCESS,
