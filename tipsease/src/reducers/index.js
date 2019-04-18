@@ -28,8 +28,11 @@ import {
   FETCH_WORKER_FAILURE,
   SEND_TIP_FAILURE,
   SEND_TIP_START,
-  SEND_TIP_SUCCESS
+  SEND_TIP_SUCCESS,
+  SEARCH,
+  FILTER
 } from "../actions";
+
 const initialState = {
   serviceWorkers: [],
   users: [],
@@ -96,6 +99,16 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload
+      };
+    case SEARCH:
+      return {
+        ...state,
+        search: action.payload
+      };
+    case FILTER:
+      return {
+        ...state,
+        filter: action.payload
       };
     default:
       return state;

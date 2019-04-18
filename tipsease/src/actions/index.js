@@ -47,6 +47,10 @@ export const SEND_TIP_START = "SEND_TIP_START";
 export const SEND_TIP_SUCCESS = "SEND_TIP_SUCCESS";
 export const SEND_TIP_FAILURE = "SEND_TIP_FAILURE";
 
+//SEARCH and FILTER
+export const SEARCH = "SEARCH";
+export const FILTER = "FILTER";
+
 //GETS SERVICE WORKER
 export const getServiceWorkers = url => dispatch => {
   dispatch({ type: FETCHING_SERVICE_WORKER });
@@ -210,3 +214,19 @@ export const getType = type => {
   console.log(type);
   return { type: GET_TYPE_SUCCESS, payload: type };
 };
+
+//search
+export const search = searchTerm => {
+  return {
+    type: SEARCH,
+    payload: searchTerm
+  };
+};
+
+//filter 
+export const filter = filterTerm => {
+  return {
+    type: FILTER,
+    payload: filterTerm
+  }
+}
