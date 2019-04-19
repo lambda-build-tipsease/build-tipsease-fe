@@ -13,6 +13,7 @@ function WorkersList(props){
       console.log("IT WAS CLICKED")
   };
 
+  
 
 
   console.log("WORKER LIST: ",props)
@@ -27,7 +28,7 @@ return (
                     <div className="content">
                         <a className="header" onClick={handleClick}>{props.fullName}</a>
                         <div className="meta">
-                        <span className="date">{props.rating}</span>
+                        <span className="date">{props.rating} rating</span>
                         </div>
                         <div className="description">
                         {props.serviceType}
@@ -37,22 +38,22 @@ return (
                         <a>
                         <i className="user icon"></i>
                         available
-                        </a>
+                        </a><br />
                         <div>
-                        {props.single && <div>{props.bio}</div>}
-                        </div>
+                        {props.single && <div>Bio: {props.bio}</div>}
+                        </div> <br />
                         <div>
-                        {props.single && <div>{props.tagline}</div>}
-                        </div>
+                        {props.single && <div>Tagline: {props.tagline}</div>}
+                        </div> <br />
                         <div>
-                        {props.single && <div>{props.timeAtJob}</div>}
-                        </div>
+                        {props.single && <div>Time @ Job: {props.timeAtJob}</div>}
+                        </div> <br />
                         <div>
-                        {props.single && <div>{props.workplace}</div>}
-                        </div>
-                        <div>
-                        {props.single && <div>TIP: <input onChange={value => props.submitTip(value)}/> <button onClick={props.submitTip}> submit tip</button></div>}
-                        </div>
+                        {props.single && <div>Work Place: {props.workplace}</div>}
+                        </div> <br />
+                        <div className="">
+                        {props.single && <div>TIP: <input style={{width:'100px', marginRight: '25px'}} onChange={value => props.submitTip(value)} /> <button className="ui inverted green button" stytle={{display:'flex'}} onClick={props.submitTip} style={{color:'#00000'}}> submit tip</button></div>}
+                        </div> <br />
                     </div>
                     </div>
     

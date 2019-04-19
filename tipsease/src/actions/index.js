@@ -42,6 +42,9 @@ export const FETCH_WORKER_START = 'FETCH_WORKER_START';
 export const FETCH_WORKER_SUCCESS = 'FETCH_WORKER_SUCCESS';
 export const FETCH_WORKER_FAILURE = 'FETCH_WORKER_FAILURE';
 
+export const ADDING_TIP_START = 'ADDING_TIP_START';
+export const ADDING_TIP_SUCCESS = 'ADDING_TIP_SUCCESS';
+export const ADDING_TIP_FAILURE = 'ADDING_TIP_FAILURE';
 //GETS SERVICE WORKER
 export const getServiceWorkers = url => dispatch => {
   dispatch({ type: FETCHING_SERVICE_WORKER });
@@ -163,6 +166,14 @@ export const getCustomers = id => dispatch => {
       });
   };
 
+
+
+//GIVE(ADD) TIP TO WORKER
+export const addTip = (id,tip) => dispatch => {
+  dispatch({type:ADDING_TIP_START});
+    axios
+      .post('https://buildtipease.herokuapp.com/serviceWorkers/pay/:id')
+}
 
   //gets TYPE
   export const getType = type => {

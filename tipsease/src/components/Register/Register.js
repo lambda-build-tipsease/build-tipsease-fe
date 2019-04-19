@@ -3,14 +3,14 @@ import axios from "axios";
 
 import { connect } from "react-redux";
 import {addServiceWorkers,addCustomers} from '../../actions';
+import faker from 'faker';
 
 class Register extends React.Component {
   state = {
     fullName: "",
     username: "",
     password: "",
-    photoUrl:
-      "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.w3schools.com%2Fhowto%2Fimg_avatar.png&imgrefurl=https%3A%2F%2Fwww.w3schools.com%2Fhowto%2Fhowto_css_image_avatar.asp&docid=IN--qpeX1hje-M&tbnid=Jjq5a5o5G80fpM%3A&vet=10ahUKEwi-iNv6gtXhAhUIZKwKHYDoBl0QMwhhKAAwAA..i&w=499&h=498&bih=839&biw=871&q=avatar%20img&ved=0ahUKEwi-iNv6gtXhAhUIZKwKHYDoBl0QMwhhKAAwAA&iact=mrc&uact=8",
+    photoUrl: "https://api.adorable.io/avatars/285/abott@adorable.png",
     serviceWorker: true,
     serviceType: ''
   };
