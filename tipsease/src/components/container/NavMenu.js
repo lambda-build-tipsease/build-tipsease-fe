@@ -1,11 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-// import SearchBar from './SearchBar'
+import { search, filter } from "../../actions/index";
+import { connect } from "react-redux";
 
-
-// const colorTheme = {
-//     color: '#5bc0be'
-// };
 class Navmenu extends React.Component {
 
 
@@ -16,6 +13,11 @@ class Navmenu extends React.Component {
 
         window.location = "/login";
     }
+    
+    handleSearch = e => {
+      this.props.search(e.target.value);
+    };
+
     render() {
 
         return (
@@ -33,7 +35,11 @@ class Navmenu extends React.Component {
                 <div className="right menu">
                     <div className="item">
                     <div className="ui icon input">
-                        <input type="text" placeholder="Search..." />
+                        <input
+                          type="text"
+                          placeholder="Search..."
+                          onChange={this.handleSearch}
+                        />
                         <i className="search link icon"></i>
                     </div>
                     </div>
@@ -48,4 +54,12 @@ class Navmenu extends React.Component {
     }
 }
 
-export default Navmenu;
+const mapStateToProps = state => ({
+  workers: state.workers,
+  search: state.search
+});
+
+export default connect(
+  mapStateToProps,
+  { search, filter }
+)(Navmenu);

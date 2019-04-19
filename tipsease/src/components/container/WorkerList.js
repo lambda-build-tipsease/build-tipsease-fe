@@ -1,39 +1,25 @@
-import React from 'react';
+import React, { Component, useRef } from "react";
 import {Link} from 'react-router-dom';
-// import axios from 'axios';
-// import {getWorkerProfile} from '../../actions';
 import {deleteServiceWorkers} from '../../actions';
 import {connect} from 'react-redux';
-function WorkersList(props){
 
-    const handleClick = (e) => {
-      e.preventDefault();
-      window.location = `/WorkerProfile/${props.id}`;
-    //   props.history.push(`home/workerprofile${props.id}`);
-    //   this.props.history.push('/workerprofile');
-      console.log("IT WAS CLICKED")
+function WorkersList(props) {
+  const inputEl = useRef(null);
+
+  const handleClick = e => {
+    e.preventDefault();
+    window.location = `/WorkerProfile/${props.id}`;
+    console.log("IT WAS CLICKED");
   };
 
-  
-//   handleDelete = () => {
-//     let id = this.props.match.params.id
-//       this.props.deleteServiceWorkers(id);
+  const handleSumbit = async e => {
+    e.preventDefault();
+    let success = await props.submitTip(inputEl.current.value);
+    console.log(success)
+  };
     
-// }
-
-    // const handleDelete = (e) => {
-    //     e.preventDefault();
-    //     let id = this.props.match.params.id
-    //       this.props.deleteServiceWorkers(id);
-        
-    // }
-
-  console.log("WORKER LIST: ",props)
-return (
-
-    
+  return (
     <div className="ui card">
-    
                     <div className="image">
                         <img src={props.photoUrl} alt="user img"/>
                     </div>
@@ -63,11 +49,9 @@ return (
                         <div>
                         {props.single && <div>Work Place: {props.workplace}</div>}
                         </div> <br />
-                        <div className="" >
-                        {props.single && <div>TIP: <input style={{width:'100px', marginRight: '25px',height:'35px'}} onChange={value => props.submitTip(value)} /> <button className="ui secondary button" onClick={props.submitTip} style={{color:'#00000', display:'flex',float:'right', height:'35px', alignContent:'center'}}> submit tip</button></div>}
-                        </div>
-                        
-                         <br />
+                        <div className="">
+                        {props.single && <div>TIP: <input ref={inputEl} style={{width:'100px', marginRight: '35px'}} /> <button className="ui secondary button" stytle={{display:'flex'}} onClick={handleSumbit} style={{color:'#00000', display:'flex',float:'right', height:'35px', alignContent:'center'}}>Submit Tip</button></div>}
+                        </div> <br />
                     </div>
                     </div>
     
