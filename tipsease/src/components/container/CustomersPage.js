@@ -1,63 +1,89 @@
 import React from "react";
 import axios from "axios";
-import { withRouter } from 'react-router-dom';
-import { getCustomers,getServiceWorkers } from '../../actions';
-import {connect} from 'react-redux';
-// import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
+import { getCustomers, getServiceWorkers } from "../../actions";
+import { connect } from "react-redux";
 import WorkerList from "./WorkerList";
 
 class CustomersPage extends React.Component {
-  
   constructor(props) {
     super(props);
     this.state = {
       workers: []
     };
   }
-  // const baseURL = 'https://buildtipease.herokuapp.com';
 
   componentDidMount() {
     this.getCustomers();
   }
 
-getCustomers = () => {
+  getCustomers = () => {
     this.props.getServiceWorkers(
       "https://buildtipease.herokuapp.com/auth/serviceWorkers"
     );
   };
 
-  handleClick = (e) => {
+  handleClick = e => {
     e.preventDefault();
-    // props.history.push(`/workerprofile${props.id}`);
-    // this.props.history.push('/workerprofile');
-    console.log("IT WAS CLICKED")
-};
+    console.log("IT WAS CLICKED");
+  };
 
-// onClick={() => this.props.history.push(`/workerprofile/${worker.id}`)
-
-
-// onClick={() => this.props.history.push(`/workerprofile/${props.workers.id}`)}
   render() {
-    const { workers } = this.props;
-    console.log("THIS PROPS",this.props)
+    const { search, workers } = this.props;
+    let workersNames = workers.map(worker => worker.fullName);
+    let workersDisplay = [];
+    if (workersNames.length > 0 && search && search.length > 0 && workers) {
+      for (let worker of workers) {
+        
+        if (worker.fullName.toLowerCase().startsWith(search.toLowerCase())) {
+          console.log(worker.fullName)
+          console.log(search)
+          workersDisplay.push(worker);
+        }
+      }
+    }
+    console.log(workersDisplay)
+    if (search && search.length > 0) {
+      return (
+        <>
+          {workers ? (
+            <div className="test">
+              <div className="ui four doubling stackable cards">
+                {workersDisplay.map(worker => (
+                  <WorkerList key={worker.id} {...worker} />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div />
+          )}
+        </>
+      );
+    }
     return (
-      <div className="test">
-        <div className="ui four doubling stackable cards">
-          {workers.map(worker => (
-            <WorkerList key={worker.id} {...worker}/>
-          ))}
-        </div>
-      </div>
+      <>
+        {workers ? (
+          <div className="test">
+            <div className="ui four doubling stackable cards">
+              {workers.map(worker => (
+                <WorkerList key={worker.id} {...worker} />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div />
+        )}
+      </>
     );
   }
 }
 
 const mapStateToProps = state => ({
-    workers: state.serviceWorkers
-})
+  workers: state.serviceWorkers,
+  search: state.search
+});
 
 export default connect(
-    mapStateToProps, { getCustomers,getServiceWorkers }
-)(CustomersPage)
-
-// export default CustomersPage;
+  mapStateToProps,
+  { getCustomers, getServiceWorkers }
+)(CustomersPage);

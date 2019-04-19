@@ -1,8 +1,9 @@
-import axios from 'axios'
+import axios from "axios";
 
 //SERVICE WORKERS
 export const FETCHING_SERVICE_WORKER = "FETCHING_SERVICE_WORKER";
-export const FETCHING_SERVICE_WORKER_SUCCESS = "FETCHING_SERVICE_WORKER_SUCCESS";
+export const FETCHING_SERVICE_WORKER_SUCCESS =
+  "FETCHING_SERVICE_WORKER_SUCCESS";
 export const FETCHING_SERVICE_WORKER_ERROR = "FETCHING_SERVICE_WORKER_ERROR";
 
 export const ADDING_SERVICE_WORKER = "ADDING_SERVICE_WORKER";
@@ -10,9 +11,9 @@ export const ADDING_SERVICE_WORKER_SUCCESS = "ADDING_SERVICE_WORKER_SUCCESS";
 export const ADDING_SERVICE_WORKER_ERROR = "ADDING_SERVICE_WORKER_ERROR";
 
 export const DELETING_SERVICE_WORKER = "DELETING_SERVICE_WORKER";
-export const DELETING_SERVICE_WORKER_SUCCESS = "DELETING_SERVICE_WORKER_SUCCESS";
+export const DELETING_SERVICE_WORKER_SUCCESS =
+  "DELETING_SERVICE_WORKER_SUCCESS";
 export const DELETING_SERVICE_WORKER_ERROR = "DELETING_SERVICE_WORKER_ERROR";
-
 
 // CUSTOMERS
 export const FETCHING_CUSTOMER = "FETCHING_CUSTOMER";
@@ -28,23 +29,32 @@ export const DELETING_CUSTOMERR_SUCCESS = "DELETING_CUSTOMER_SUCCESS";
 export const DELETING_CUSTOMER_ERROR = "DELETING_CUSTOMER_ERROR";
 
 // USERTYPE
-export const GET_TYPE_START = "GET_TYPE_START"
-export const GET_TYPE_SUCCESS = "GET_TYPE_SUCCESS"
-export const GET_TYPE_ERROR = "GET_TYPE_ERROR"
-
+export const GET_TYPE_START = "GET_TYPE_START";
+export const GET_TYPE_SUCCESS = "GET_TYPE_SUCCESS";
+export const GET_TYPE_ERROR = "GET_TYPE_ERROR";
 
 //FETCH
-export const FETCH_WORKERS_START = 'FETCH_WORKERS_START';
-export const FETCH_WORKERS_SUCCESS = 'FETCH_WORKERS_SUCCESS';
-export const FETCH_WORKERS_FAILURE = 'FETCH_WORKERS_FAILURE';
+export const FETCH_WORKERS_START = "FETCH_WORKERS_START";
+export const FETCH_WORKERS_SUCCESS = "FETCH_WORKERS_SUCCESS";
+export const FETCH_WORKERS_FAILURE = "FETCH_WORKERS_FAILURE";
 
-export const FETCH_WORKER_START = 'FETCH_WORKER_START';
-export const FETCH_WORKER_SUCCESS = 'FETCH_WORKER_SUCCESS';
-export const FETCH_WORKER_FAILURE = 'FETCH_WORKER_FAILURE';
+export const FETCH_WORKER_START = "FETCH_WORKER_START";
+export const FETCH_WORKER_SUCCESS = "FETCH_WORKER_SUCCESS";
+export const FETCH_WORKER_FAILURE = "FETCH_WORKER_FAILURE";
+
+//TIP
+export const SEND_TIP_START = "SEND_TIP_START";
+export const SEND_TIP_SUCCESS = "SEND_TIP_SUCCESS";
+export const SEND_TIP_FAILURE = "SEND_TIP_FAILURE";
+
+//SEARCH and FILTER
+export const SEARCH = "SEARCH";
+export const FILTER = "FILTER";
 
 export const ADDING_TIP_START = 'ADDING_TIP_START';
 export const ADDING_TIP_SUCCESS = 'ADDING_TIP_SUCCESS';
 export const ADDING_TIP_FAILURE = 'ADDING_TIP_FAILURE';
+
 //GETS SERVICE WORKER
 export const getServiceWorkers = url => dispatch => {
   dispatch({ type: FETCHING_SERVICE_WORKER });
@@ -59,124 +69,168 @@ export const getServiceWorkers = url => dispatch => {
       dispatch({ type: FETCHING_SERVICE_WORKER_ERROR, payload: err });
     });
 };
-  
-  //ADDS SERVICE WORKER
-  export const addServiceWorkers = serviceWorker => async dispatch => {
-    dispatch({ type: ADDING_SERVICE_WORKER });
-    let addedWorker = axios
-      .post("https://buildtipease.herokuapp.com/auth/serviceWorkers/register", serviceWorker)
-      .then(res => {
-        console.log('RES DATA LOGIN RESPONSE:', res);
-        return dispatch({ type: ADDING_SERVICE_WORKER_SUCCESS, payload: res.data });
-      })
-      .catch(err => {
-       return dispatch({ type: ADDING_SERVICE_WORKER_ERROR, payload: err });
-      });
-  };
-  //DELETES SERVICE WORKER 
-  export const deleteServiceWorkers = id => dispatch => {
-    dispatch({ type: DELETING_SERVICE_WORKER,payload: id });
-    axios
-      .delete(`https://buildtipease.herokuapp.com/auth/serviceWorkers/${id}`)
-      .then(res => {
-        dispatch({ type: DELETING_SERVICE_WORKER_SUCCESS, payload: res.data });
-      })
-      .catch(err => {
-        dispatch({ type: DELETING_SERVICE_WORKER_ERROR, payload: err });
-      });
-  };
 
-
+//ADDS SERVICE WORKER
+export const addServiceWorkers = serviceWorker => async dispatch => {
+  dispatch({ type: ADDING_SERVICE_WORKER });
+  let addedWorker = axios
+    .post(
+      "https://buildtipease.herokuapp.com/auth/serviceWorkers/register",
+      serviceWorker
+    )
+    .then(res => {
+      console.log("RES DATA LOGIN RESPONSE:", res);
+      return dispatch({
+        type: ADDING_SERVICE_WORKER_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      return dispatch({ type: ADDING_SERVICE_WORKER_ERROR, payload: err });
+    });
+};
+//DELETES SERVICE WORKER
+export const deleteServiceWorkers = id => dispatch => {
+  dispatch({ type: DELETING_SERVICE_WORKER, payload: id });
+  axios
+    .delete(`https://buildtipease.herokuapp.com/auth/serviceWorkers/${id}`)
+    .then(res => {
+      dispatch({ type: DELETING_SERVICE_WORKER_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: DELETING_SERVICE_WORKER_ERROR, payload: err });
+    });
+};
 
 //   CUSTOMERS
 
 //GETS CUSTOMERS
 export const getCustomers = id => dispatch => {
-    dispatch({ type: FETCHING_CUSTOMER });
-    axios
-      .get(`https://buildtipease.herokuapp.com/users/${id}`)
-      .then(res => {
-        dispatch({ type: FETCHING_CUSTOMER_SUCCESS, payload: res.data });
-      })
-      .catch(err => {
-        dispatch({ type: FETCHING_CUSTOMER_ERROR, payload: err });
+  dispatch({ type: FETCHING_CUSTOMER });
+  axios
+    .get(`https://buildtipease.herokuapp.com/users/${id}`)
+    .then(res => {
+      dispatch({ type: FETCHING_CUSTOMER_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: FETCHING_CUSTOMER_ERROR, payload: err });
+    });
+};
+
+//ADDS CUSTOMERS
+export const addCustomers = users => dispatch => {
+  dispatch({ type: ADDING_CUSTOMER });
+  axios
+    .post("https://buildtipease.herokuapp.com/auth/users/register", users)
+    .then(res => {
+      dispatch({ type: ADDING_SERVICE_WORKER_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: ADDING_SERVICE_WORKER_ERROR, payload: err });
+    });
+};
+//DELETES CUSTOMERS
+export const deleteCustomers = id => dispatch => {
+  dispatch({ type: DELETING_CUSTOMER, payload: id });
+  axios
+    .delete(`https://buildtipease.herokuapp.com/users/${id}`)
+    .then(res => {
+      dispatch({ type: DELETING_SERVICE_WORKER_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: DELETING_SERVICE_WORKER_ERROR, payload: err });
+    });
+};
+
+export const getWorkers = () => dispatch => {
+  dispatch({ type: FETCH_WORKER_START });
+  axios
+    .get("https://buildtipease.herokuapp.com/auth/serviceWorkers:")
+    .then(res => {
+      dispatch({
+        type: FETCH_WORKERS_SUCCESS,
+        payload: res.data
       });
-  };
-  
-  //ADDS CUSTOMERS
-  export const addCustomers = users => dispatch => {
-    dispatch({ type: ADDING_CUSTOMER });
-    axios
-      .post("https://buildtipease.herokuapp.com/auth/users/register", users)
-      .then(res => {
-        dispatch({ type: ADDING_SERVICE_WORKER_SUCCESS, payload: res.data });
-      })
-      .catch(err => {
-        dispatch({ type: ADDING_SERVICE_WORKER_ERROR, payload: err });
+    })
+    .catch(err => {
+      dispatch({
+        type: FETCH_WORKERS_FAILURE,
+        payload: err.message
       });
-  };
-  //DELETES CUSTOMERS
-  export const deleteCustomers = id => dispatch => {
-    dispatch({ type: DELETING_CUSTOMER,payload: id });
-    axios
-      .delete(`https://buildtipease.herokuapp.com/users/${id}`)
-      .then(res => {
-        dispatch({ type: DELETING_SERVICE_WORKER_SUCCESS, payload: res.data });
-      })
-      .catch(err => {
-        dispatch({ type: DELETING_SERVICE_WORKER_ERROR, payload: err });
+    });
+};
+
+export const getWorkerProfile = id => dispatch => {
+  const token = localStorage.getItem("token");
+  dispatch({ type: FETCH_WORKER_START });
+  axios
+    .get(`https://buildtipease.herokuapp.com/serviceWorkers/${id}`, {
+      headers: { authorization: token }
+    })
+    .then(res => {
+      dispatch({
+        type: FETCH_WORKER_SUCCESS,
+        payload: res.data
       });
-  };
-
-
-  export const getWorkers = () => (dispatch) => {
-    dispatch({ type: FETCH_WORKER_START });
-    axios
-      .get('https://buildtipease.herokuapp.com/auth/serviceWorkers:')
-      .then((res) => {
-        dispatch({
-          type: FETCH_WORKERS_SUCCESS,
-          payload: res.data
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: FETCH_WORKERS_FAILURE,
-          payload: err.message
-        });
+    })
+    .catch(err => {
+      dispatch({
+        type: FETCH_WORKER_FAILURE,
+        payload: err.message
       });
-  };
-  
-  export const getWorkerProfile = (id) => (dispatch) => {
-    const token = localStorage.getItem("token");
-    dispatch({ type: FETCH_WORKER_START });
-    axios
-      .get(`https://buildtipease.herokuapp.com/serviceWorkers/${id}`, {headers:{authorization: token}})
-      .then((res) => {
-        dispatch({
-          type: FETCH_WORKER_SUCCESS,
-          payload: res.data
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: FETCH_WORKER_FAILURE,
-          payload: err.message
-        });
+    });
+};
+
+export const sendTip = (id, tip) => async dispatch => {
+  const token = localStorage.getItem("token");
+  const username = localStorage.getItem("username");
+  console.log(username);
+  console.log(id);
+
+  console.log(tip);
+
+  dispatch({ type: SEND_TIP_START });
+  let status = await axios
+    .put(
+      `https://buildtipease.herokuapp.com/serviceWorkers/pay/${id}`,
+      { payment: tip },
+      { headers: { authorization: token } }
+    )
+    .then(res => {
+      dispatch({
+        type: SEND_TIP_SUCCESS,
+        payload: res.data
       });
+      return res;
+    })
+    .catch(err => {
+      dispatch({
+        type: SEND_TIP_FAILURE,
+        payload: err.message
+      });
+      return err;
+    });
+  return status;
+};
+
+//gets TYPE
+export const getType = type => {
+  console.log(type);
+  return { type: GET_TYPE_SUCCESS, payload: type };
+};
+
+//search
+export const search = searchTerm => {
+  return {
+    type: SEARCH,
+    payload: searchTerm
   };
+};
 
-
-
-//GIVE(ADD) TIP TO WORKER
-export const addTip = (id,tip) => dispatch => {
-  dispatch({type:ADDING_TIP_START});
-    axios
-      .post('https://buildtipease.herokuapp.com/serviceWorkers/pay/:id')
-}
-
-  //gets TYPE
-  export const getType = type => {
-    console.log(type);
-    return { type: GET_TYPE_SUCCESS, payload: type};
+//filter 
+export const filter = filterTerm => {
+  return {
+    type: FILTER,
+    payload: filterTerm
   }
+}

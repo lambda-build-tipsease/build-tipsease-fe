@@ -1,27 +1,22 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import {getWorkerProfile} from '../../actions';
+import React, { Component, useRef } from "react";
 
+function WorkersList(props) {
+  const inputEl = useRef(null);
 
-function WorkersList(props){
-
-    const handleClick = (e) => {
-      e.preventDefault();
-      window.location = `/WorkerProfile/${props.id}`;
-    //   props.history.push(`home/workerprofile${props.id}`);
-    //   this.props.history.push('/workerprofile');
-      console.log("IT WAS CLICKED")
+  const handleClick = e => {
+    e.preventDefault();
+    window.location = `/WorkerProfile/${props.id}`;
+    console.log("IT WAS CLICKED");
   };
 
+  const handleSumbit = async e => {
+    e.preventDefault();
+    let success = await props.submitTip(inputEl.current.value);
+    console.log(success)
+  };
   
-
-
-  console.log("WORKER LIST: ",props)
-return (
-
-    
+  return (
     <div className="ui card">
-    
                     <div className="image">
                         <img src={props.photoUrl} alt="user img"/>
                     </div>
@@ -52,7 +47,7 @@ return (
                         {props.single && <div>Work Place: {props.workplace}</div>}
                         </div> <br />
                         <div className="">
-                        {props.single && <div>TIP: <input style={{width:'100px', marginRight: '25px'}} onChange={value => props.submitTip(value)} /> <button className="ui inverted green button" stytle={{display:'flex'}} onClick={props.submitTip} style={{color:'#00000'}}> submit tip</button></div>}
+                        {props.single && <div>TIP: <input ref={inputEl} style={{width:'100px', marginRight: '25px'}} /> <button className="ui inverted green button" stytle={{display:'flex'}} onClick={handleSumbit} style={{color:'#00000'}}>Submit Tip</button></div>}
                         </div> <br />
                     </div>
                     </div>
