@@ -2,8 +2,8 @@ import React from "react";
 import axios from "axios";
 
 import { connect } from "react-redux";
-import {addServiceWorkers,addCustomers} from '../../actions';
-import faker from 'faker';
+import { addServiceWorkers, addCustomers } from "../../actions";
+import faker from "faker";
 
 class Register extends React.Component {
   state = {
@@ -12,7 +12,7 @@ class Register extends React.Component {
     password: "",
     photoUrl: "https://api.adorable.io/avatars/285/abott@adorable.png",
     serviceWorker: true,
-    serviceType: ''
+    serviceType: ""
   };
 
   serviceWorker = event => {
@@ -59,82 +59,37 @@ class Register extends React.Component {
 
     if (this.state.serviceWorker) {
       url = workerURL;
-        employee = 'serviceWorkers';
+      employee = "serviceWorkers";
     } else {
       url = userURL;
     }
 
-    this.registerALL(url)
-
-    // console.log("STATE", this.state)
-    // axios
-    //   .post('https://buildtipease.herokuapp.com/auth/users/register', {
-    //     fullName: this.state.fullName,
-    //     username: this.state.username,
-    //     password: this.state.password,
-    //     // serviceType: this.state.serviceType,
-    //     photoUrl: this.state.photoUrl
-    //   })
-    //   .then(res => {
-    //     // localStorage.setItem('token', res.data.token);
-    //     console.log("it worked", res.data)
-
-    //     // this.props.history.push("/protected");
-    //   })
-    //   .catch(err => this.setState({ errorMsg: 'ERROR: This username is already in use' }));
+    this.registerALL(url);
   };
 
-  registerALL = async (workerLink) => {
-    const {fullName,username,password,photoUrl,serviceType} = this.state;
+  registerALL = async workerLink => {
+    const { fullName, username, password, photoUrl, serviceType, serviceWorker } = this.state;
 
     let result;
 
-    if(serviceType) {
-        
-      result = await this.props.addServiceWorkers({fullName,username,password,photoUrl,serviceType})
-        // localStorage.setItem('token', res.data.token);
-      // axios.post(workerLink,
-      //   {
-      //     fullName: this.state.fullName,
-      //     username: this.state.username,
-      //     password: this.state.password,
-      //     serviceType: serviceType,
-      //     photoUrl: this.state.photoUrl
-      //   })
-      //     .then(res => {
-      //       // localStorage.setItem('token', res.data.token);
-      //       console.log("it worked", res.data);
-  
-      //       // this.props.history.push("/protected");
-      //     })
-      //     .catch(err => {
-      //       this.setState({ errorMsg: "ERROR: This username is already in use" })
-      //     });
-
-    }else {
-
-      result = await this.props.addCustomers({fullName,username,password,photoUrl})
-        // localStorage.setItem('token', res.data.token);
-      // axios.post(workerLink,
-      //   {
-      //     fullName: this.state.fullName,
-      //     username: this.state.username,
-      //     password: this.state.password,
-      //     photoUrl: this.state.photoUrl
-      //   })
-      //     .then(res => {
-      //       // localStorage.setItem('token', res.data.token);
-      //       console.log("it worked", res.data);
-  
-      //       // this.props.history.push("/protected");
-      //     })
-      //     .catch(err => {
-      //       this.setState({ errorMsg: "ERROR: This username is already in use" })
-      //     });
+    if (serviceWorker) {
+      result = await this.props.addServiceWorkers({
+        fullName,
+        username,
+        password,
+        photoUrl,
+        serviceType
+      });
+    } else {
+      result = await this.props.addCustomers({
+        fullName,
+        username,
+        password,
+        photoUrl
+      });
     }
 
-    console.log(result)
-
+    console.log(result);
   };
 
   render() {
@@ -240,7 +195,11 @@ class Register extends React.Component {
           </div>
           <div className="field">
             <label>Service Type</label>
-            <textarea onChange={this.handleChanges} name="serviceType" value={this.state.serviceType}/>
+            <textarea
+              onChange={this.handleChanges}
+              name="serviceType"
+              value={this.state.serviceType}
+            />
           </div>
           <h4 className="ui dividing header">Account Info</h4>
           <div className="two fields">
@@ -279,7 +238,6 @@ class Register extends React.Component {
                 type="radio"
                 onChange={this.toggleCheck}
                 checked={this.state.serviceWorker}
-                defaultChecked
               />
               <label>Service Worker</label>
             </div>
@@ -318,5 +276,5 @@ class Register extends React.Component {
 
 export default connect(
   null,
-  { addServiceWorkers,addCustomers }
+  { addServiceWorkers, addCustomers }
 )(Register);

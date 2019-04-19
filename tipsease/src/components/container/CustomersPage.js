@@ -9,6 +9,7 @@ class CustomersPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: '',
       workers: []
     };
   }
@@ -30,19 +31,16 @@ class CustomersPage extends React.Component {
 
   render() {
     const { search, workers } = this.props;
+    const { username } = this.state;
     let workersNames = workers.map(worker => worker.fullName);
     let workersDisplay = [];
     if (workersNames.length > 0 && search && search.length > 0 && workers) {
       for (let worker of workers) {
-        
         if (worker.fullName.toLowerCase().startsWith(search.toLowerCase())) {
-          console.log(worker.fullName)
-          console.log(search)
           workersDisplay.push(worker);
         }
       }
     }
-    console.log(workersDisplay)
     if (search && search.length > 0) {
       return (
         <>

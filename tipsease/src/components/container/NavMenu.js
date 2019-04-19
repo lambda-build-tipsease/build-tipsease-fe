@@ -7,6 +7,9 @@ const colorTheme = {
   color: "#5bc0be"
 };
 class Navmenu extends React.Component {
+
+  state = { username: "" };
+
   logoutHandler = async e => {
     console.log("LOGOUT CLICKED");
     await localStorage.clear();
@@ -19,14 +22,20 @@ class Navmenu extends React.Component {
     this.props.search(e.target.value);
   };
 
+  async componentDidMount() {
+    let username = await localStorage.getItem("username");
+    this.setState({ username });
+  }
+
   render() {
     return (
       <div className="ui secondary  menu">
         <a className="active item" style={colorTheme}>
           Tipsease
         </a>
-        <a className="item">Profile</a>
+        <a className="item" onClick={() => this.props.linkToProfile()}>Profile</a>
         <a className="item">Favorites</a>
+        <p style={{ marginLeft: "20%" }}>Hello {this.state.username}</p>
         <div className="right menu">
           <div className="item">
             <div className="ui icon input">

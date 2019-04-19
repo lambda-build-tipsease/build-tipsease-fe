@@ -123,10 +123,10 @@ export const addCustomers = users => dispatch => {
   axios
     .post("https://buildtipease.herokuapp.com/auth/users/register", users)
     .then(res => {
-      dispatch({ type: ADDING_SERVICE_WORKER_SUCCESS, payload: res.data });
+      dispatch({ type: ADDING_CUSTOMER_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: ADDING_SERVICE_WORKER_ERROR, payload: err });
+      dispatch({ type: ADDING_CUSTOMER_ERROR, payload: err });
     });
 };
 //DELETES CUSTOMERS
@@ -139,24 +139,6 @@ export const deleteCustomers = id => dispatch => {
     })
     .catch(err => {
       dispatch({ type: DELETING_SERVICE_WORKER_ERROR, payload: err });
-    });
-};
-
-export const getWorkers = () => dispatch => {
-  dispatch({ type: FETCH_WORKER_START });
-  axios
-    .get("https://buildtipease.herokuapp.com/auth/serviceWorkers:")
-    .then(res => {
-      dispatch({
-        type: FETCH_WORKERS_SUCCESS,
-        payload: res.data
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: FETCH_WORKERS_FAILURE,
-        payload: err.message
-      });
     });
 };
 
