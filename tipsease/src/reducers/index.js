@@ -33,7 +33,11 @@ import {
 
     FETCH_WORKER_START,
     FETCH_WORKER_SUCCESS,
-    FETCH_WORKER_FAILURE
+    FETCH_WORKER_FAILURE,
+
+    ADDING_TIP_START,
+    ADDING_TIP_SUCCESS,
+    ADDING_TIP_FAILURE
 
 } from "../actions";
 const initialState = {
@@ -93,6 +97,18 @@ const initialState = {
           ...state,
           serviceWorker: action.payload
         }
+
+        case ADDING_TIP_SUCCESS:
+      return {
+        ...state,
+        payment: action.payload
+      };
+    case ADDING_TIP_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
+
       default:
         return state;
     }
