@@ -1,18 +1,25 @@
 import React from 'react'
 import WorkerList from './WorkerList';
 import { connect } from 'react-redux';
-import { getWorkerProfile } from '../../actions'
+import { getWorkerProfile,deleteServiceWorkers } from '../../actions'
 import NavMenu from './NavMenu'
+import { Button } from '@material-ui/core';
 const mapStateToProps = state => ({
     serviceWorker: state.serviceWorker,
     state
 })
 
-
+// const serviceWorker = props => {
+//     const handleClickDelete = () => {
+//       props.deleteServiceWorkers(props.id);
+//     };
 
 class WorkerProfile extends React.Component {
     componentDidMount() {
+        // this.deleteServiceWorkers();
         this.getCustomers();
+        deleteServiceWorkers();
+        console.log('DELETE',deleteServiceWorkers())
       }
     
     getCustomers = () => {
@@ -26,6 +33,11 @@ class WorkerProfile extends React.Component {
         
     }
 
+    deleteServiceWorkers = () => {
+        let id = this.props.match.params.id
+          this.props.deleteServiceWorkers(id);
+        
+    }
     render(){
         let id = this.props.match.params.id
         console.log(id);
@@ -37,7 +49,7 @@ class WorkerProfile extends React.Component {
         return( <>
         <NavMenu />
         <div className="ui centered card" style={{marginTop:'50px'}}>
-            <div><WorkerList {...this.props.serviceWorker} single={true} submitTip={this.submitTip}/></div>
+            <div><WorkerList {...this.props.serviceWorker} single={true} submitTip={this.submitTip}/><Button style={{left: '37%'}}>Favorite</Button></div>
             </div>
             </>
         )}

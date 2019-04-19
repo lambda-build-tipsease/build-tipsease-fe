@@ -74,7 +74,7 @@ export class Login extends React.Component {
 //       localStorage.setItem('token', token);
 //       localStorage.setItem('username', username)
 //       localStorage.setItem('password', password)
-//       localStorage.getItem('type', type)
+//       localStorage.getItem('serviceType', type)
 //       console.log(token)
 //       console.log("USER ID",userInfo.id)
 //       this.setState({ userType: localStorage.getItem('type') })
@@ -119,18 +119,18 @@ export class Login extends React.Component {
               <div className="inline fields">
               <div className="field">
                 <div className="ui radio checkbox">
-                  <input type="radio" name="example2" defaultChecked  />
+                  <input type="radio" id="users" name="example2" defaultChecked  onChange={this.handleChanges}/>
                   <label>User</label>
                 </div>
               </div>
               <div className="field">
                 <div className="ui radio checkbox">
-                  <input type="radio" name="example2"/>
+                  <input type="radio" id="serviceWorkers" name="example2"/>
                   <label>Service Worker</label>
                 </div>
               </div>
             </div>
-              <button className="ui primary labeled icon button" type="submit">
+              <button className="ui primary labeled icon button" type="submit" onChange={this.handleChanges}>
                 <i className="unlock alternate icon"></i>
                 Login
               </button>

@@ -81,7 +81,7 @@ export const getServiceWorkers = url => dispatch => {
   };
   //DELETES SERVICE WORKER 
   export const deleteServiceWorkers = id => dispatch => {
-    dispatch({ type: DELETING_SERVICE_WORKER,payload: id });
+    dispatch({ type: DELETING_SERVICE_WORKER });
     axios
       .delete(`https://buildtipease.herokuapp.com/auth/serviceWorkers/${id}`)
       .then(res => {

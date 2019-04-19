@@ -2,8 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 // import axios from 'axios';
 // import {getWorkerProfile} from '../../actions';
-
-
+import {deleteServiceWorkers} from '../../actions';
+import {connect} from 'react-redux';
 function WorkersList(props){
 
     const handleClick = (e) => {
@@ -15,7 +15,18 @@ function WorkersList(props){
   };
 
   
+//   handleDelete = () => {
+//     let id = this.props.match.params.id
+//       this.props.deleteServiceWorkers(id);
+    
+// }
 
+    // const handleDelete = (e) => {
+    //     e.preventDefault();
+    //     let id = this.props.match.params.id
+    //       this.props.deleteServiceWorkers(id);
+        
+    // }
 
   console.log("WORKER LIST: ",props)
 return (
@@ -52,9 +63,11 @@ return (
                         <div>
                         {props.single && <div>Work Place: {props.workplace}</div>}
                         </div> <br />
-                        <div className="">
+                        <div className="" >
                         {props.single && <div>TIP: <input style={{width:'100px', marginRight: '25px',height:'35px'}} onChange={value => props.submitTip(value)} /> <button className="ui secondary button" onClick={props.submitTip} style={{color:'#00000', display:'flex',float:'right', height:'35px', alignContent:'center'}}> submit tip</button></div>}
-                        </div> <br />
+                        </div>
+                        
+                         <br />
                     </div>
                     </div>
     
