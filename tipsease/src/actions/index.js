@@ -69,66 +69,59 @@ export const getServiceWorkers = url => dispatch => {
       dispatch({ type: FETCHING_SERVICE_WORKER_ERROR, payload: err });
     });
 };
-
-//ADDS SERVICE WORKER
-export const addServiceWorkers = serviceWorker => async dispatch => {
-  dispatch({ type: ADDING_SERVICE_WORKER });
-  let addedWorker = axios
-    .post(
-      "https://buildtipease.herokuapp.com/auth/serviceWorkers/register",
-      serviceWorker
-    )
-    .then(res => {
-      console.log("RES DATA LOGIN RESPONSE:", res);
-      return dispatch({
-        type: ADDING_SERVICE_WORKER_SUCCESS,
-        payload: res.data
+  
+  //ADDS SERVICE WORKER
+  export const addServiceWorkers = serviceWorker => async dispatch => {
+    dispatch({ type: ADDING_SERVICE_WORKER });
+    let addedWorker = axios
+      .post("https://buildtipease.herokuapp.com/auth/serviceWorkers/register", serviceWorker)
+      .then(res => {
+        console.log('RES DATA LOGIN RESPONSE:', res);
+        return dispatch({ type: ADDING_SERVICE_WORKER_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+       return dispatch({ type: ADDING_SERVICE_WORKER_ERROR, payload: err });
       });
-    })
-    .catch(err => {
-      return dispatch({ type: ADDING_SERVICE_WORKER_ERROR, payload: err });
-    });
-};
-//DELETES SERVICE WORKER
-export const deleteServiceWorkers = id => dispatch => {
-  dispatch({ type: DELETING_SERVICE_WORKER, payload: id });
-  axios
-    .delete(`https://buildtipease.herokuapp.com/auth/serviceWorkers/${id}`)
-    .then(res => {
-      dispatch({ type: DELETING_SERVICE_WORKER_SUCCESS, payload: res.data });
-    })
-    .catch(err => {
-      dispatch({ type: DELETING_SERVICE_WORKER_ERROR, payload: err });
-    });
-};
-
-//   CUSTOMERS
+  };
+  //DELETES SERVICE WORKER 
+  export const deleteServiceWorkers = id => dispatch => {
+    dispatch({ type: DELETING_SERVICE_WORKER });
+    axios
+      .delete(`https://buildtipease.herokuapp.com/auth/serviceWorkers/${id}`)
+      .then(res => {
+        dispatch({ type: DELETING_SERVICE_WORKER_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: DELETING_SERVICE_WORKER_ERROR, payload: err });
+      });
+  };
 
 //GETS CUSTOMERS
 export const getCustomers = id => dispatch => {
-  dispatch({ type: FETCHING_CUSTOMER });
-  axios
-    .get(`https://buildtipease.herokuapp.com/users/${id}`)
-    .then(res => {
-      dispatch({ type: FETCHING_CUSTOMER_SUCCESS, payload: res.data });
-    })
-    .catch(err => {
-      dispatch({ type: FETCHING_CUSTOMER_ERROR, payload: err });
-    });
-};
+    dispatch({ type: FETCHING_CUSTOMER });
+    axios
+      .get(`https://buildtipease.herokuapp.com/users/${id}`)
+      .then(res => {
+        dispatch({ type: FETCHING_CUSTOMER_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: FETCHING_CUSTOMER_ERROR, payload: err });
+      });
+  };
+  
+  //ADDS CUSTOMERS
+  export const addCustomers = users => dispatch => {
+    dispatch({ type: ADDING_CUSTOMER });
+    axios
+      .post("https://buildtipease.herokuapp.com/auth/users/register", users)
+      .then(res => {
+        dispatch({ type: ADDING_CUSTOMER_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: ADDING_CUSTOMER_ERROR, payload: err });
+      });
+  };
 
-//ADDS CUSTOMERS
-export const addCustomers = users => dispatch => {
-  dispatch({ type: ADDING_CUSTOMER });
-  axios
-    .post("https://buildtipease.herokuapp.com/auth/users/register", users)
-    .then(res => {
-      dispatch({ type: ADDING_SERVICE_WORKER_SUCCESS, payload: res.data });
-    })
-    .catch(err => {
-      dispatch({ type: ADDING_SERVICE_WORKER_ERROR, payload: err });
-    });
-};
 //DELETES CUSTOMERS
 export const deleteCustomers = id => dispatch => {
   dispatch({ type: DELETING_CUSTOMER, payload: id });
@@ -181,6 +174,12 @@ export const getWorkerProfile = id => dispatch => {
     });
 };
 
+  //gets TYPE
+  export const getType = type => {
+    console.log(type);
+    return { type: GET_TYPE_SUCCESS, payload: type};
+  }
+
 export const sendTip = (id, tip) => async dispatch => {
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("username");
@@ -211,12 +210,6 @@ export const sendTip = (id, tip) => async dispatch => {
       return err;
     });
   return status;
-};
-
-//gets TYPE
-export const getType = type => {
-  console.log(type);
-  return { type: GET_TYPE_SUCCESS, payload: type };
 };
 
 //search

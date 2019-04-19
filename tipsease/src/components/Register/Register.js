@@ -10,7 +10,7 @@ class Register extends React.Component {
     fullName: "",
     username: "",
     password: "",
-    photoUrl: "https://api.adorable.io/avatars/285/abott@adorable.png",
+    photoUrl: faker.image.people(),
     serviceWorker: true,
     serviceType: ''
   };
@@ -89,7 +89,7 @@ class Register extends React.Component {
 
     let result;
 
-    if(serviceType) {
+    if(this.state.serviceWorker) {
         
       result = await this.props.addServiceWorkers({fullName,username,password,photoUrl,serviceType})
         // localStorage.setItem('token', res.data.token);
@@ -240,7 +240,8 @@ class Register extends React.Component {
           </div>
           <div className="field">
             <label>Service Type</label>
-            <textarea onChange={this.handleChanges} name="serviceType" value={this.state.serviceType}/>
+            <input style={{height:'20px', width:'200px'}}onChange={this.handleChanges} name="serviceType" value={this.state.serviceType}/>
+            
           </div>
           <h4 className="ui dividing header">Account Info</h4>
           <div className="two fields">

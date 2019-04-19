@@ -52,16 +52,16 @@ const initialState = {
           ...state,
           error: action.payload
         }
-      case FETCHING_CUSTOMER_SUCCESS:
-        return {
-          ...state,
-          patrons: action.payload
-        }
-      case FETCHING_CUSTOMER_ERROR:
-        return {
-          ...state,
-          error: action.payload
-        }
+      // case FETCHING_CUSTOMER_SUCCESS:
+      //   return {
+      //     ...state,
+      //     patrons: action.payload
+      //   }
+      // case FETCHING_CUSTOMER_ERROR:
+      //   return {
+      //     ...state,
+      //     error: action.payload
+      //   }
       case ADDING_SERVICE_WORKER:
         return {
           ...state,

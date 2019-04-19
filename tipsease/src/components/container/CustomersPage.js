@@ -1,8 +1,6 @@
 import React from "react";
-import axios from "axios";
-import { withRouter } from "react-router-dom";
-import { getCustomers, getServiceWorkers } from "../../actions";
-import { connect } from "react-redux";
+import { getCustomers,getServiceWorkers } from '../../actions';
+import {connect} from 'react-redux';
 import WorkerList from "./WorkerList";
 
 class CustomersPage extends React.Component {

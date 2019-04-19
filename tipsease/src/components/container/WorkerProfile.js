@@ -3,7 +3,8 @@ import WorkerList from "./WorkerList";
 import SuccessModal from "./SuccessModal";
 import { connect } from "react-redux";
 import { getWorkerProfile, sendTip } from "../../actions";
-import { Button, Header, Image, Modal } from "semantic-ui-react";
+import { Modal } from "semantic-ui-react";
+import NavMenu from "./NavMenu";
 
 const mapStateToProps = state => ({
   serviceWorker: state.serviceWorker,
@@ -11,7 +12,9 @@ const mapStateToProps = state => ({
 });
 
 class WorkerProfile extends React.Component {
-  state = { modal: false, tip: null };
+
+  state = { tip: "" };
+  
   componentDidMount() {
     this.getCustomers();
   }
@@ -25,6 +28,11 @@ class WorkerProfile extends React.Component {
     this.props.sendTip(this.props.match.params.id, tip).then(res => {
       this.setState({ tip, modal: true });
     });
+  };
+
+  deleteServiceWorkers = () => {
+    let id = this.props.match.params.id;
+    this.props.deleteServiceWorkers(id);
   };
 
   render() {
