@@ -19,8 +19,8 @@ class Navmenu extends React.Component {
 
         return (
             
-                <div className="ui secondary  menu" >
-                <a className="active item" style={colorTheme}>
+                <div className="ui secondary  menu" style={{background:'#5bc0be'}}>
+                <a className="active item" style={{background:'#2185d0'}}>
                     Tipsease
                 </a>
                 <a className="item">

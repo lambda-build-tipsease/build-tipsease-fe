@@ -17,11 +17,12 @@ class App extends React.Component {
             
             
             
-            
+            <Switch>
             <Link to="/login" component={Login}>Login</Link>
             <Link to="/register" component={Register}>Register</Link>
             <Link to="/home" component={Home}>Home</Link>
             <Link to="/workerprofile" component={WorkerProfile}>WorkerProfile</Link>
+            </Switch>
             <Switch>
 
             <Route path = "/register" component = {Register} />

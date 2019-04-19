@@ -20,7 +20,7 @@ function WorkersList(props){
 return (
 
     
-    <div className="ui card" style={{background:'#5bc0be'}}>
+    <div className="ui card">
     
                     <div className="image">
                         <img src={props.photoUrl} alt="user img"/>
@@ -28,13 +28,13 @@ return (
                     <div className="content">
                         <a className="header" onClick={handleClick}>{props.fullName}</a>
                         <div className="meta">
-                        <span className="date">Rating: {props.rating} stars</span>
+                        <span className="date">Rating: <strong></strong>{props.rating} stars</span>
                         </div>
                         <div className="description">
                         Service: {props.serviceType}
                         </div>
                     </div>
-                    <div className="extra content">
+                    <div className="extra content" style={{background:'#5bc0be'}}>
                         <a>
                         <i className="user icon"></i>
                         available
