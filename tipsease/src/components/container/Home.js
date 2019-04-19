@@ -6,7 +6,7 @@ import CustomersPage from './CustomersPage';
 class Home extends React.Component {
     render() {
         return(
-            <div className="ui segment">
+            <div className="ui container">
             <Navmenu />
             
             <CustomersPage / >

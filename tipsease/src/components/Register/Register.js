@@ -89,7 +89,7 @@ class Register extends React.Component {
 
     let result;
 
-    if(serviceType) {
+    if(this.state.serviceWorker) {
         
       result = await this.props.addServiceWorkers({fullName,username,password,photoUrl,serviceType})
         // localStorage.setItem('token', res.data.token);

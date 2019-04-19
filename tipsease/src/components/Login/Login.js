@@ -1,17 +1,25 @@
-import React from "react";
-// import {connect} from 'react-redux'
+import React, { Children } from "react";
+import {connect} from 'react-redux';
 // import { withRouter } from "react-router";
 import { Route, Link } from "react-router-dom";
 import axios from "axios";
-import Home from '../container/Home'
+import Home from '../container/Home';
+import {addServiceWorkers,addCustomers, getType,getWorkers} from '../../actions';
 // import users from "./users";
 // import Register from '../Register/Register';
-
-
+import logo from './logo.png';
+import styled, {ThemeProvider} from 'styled-components';
+import theme from 'styled-theming';
 
 const loginpageStyle = {
-  marginTop: '50px',
+  marginTop: '100px'
 };
+
+// const HeaderImage = styled.div`
+//   background-image: url(${logo})
+// `;
+const logobg = require('./logo.png');
+// const style = {background: 'url(./logo.png)'}
 
 export class Login extends React.Component {
   state = {
@@ -40,7 +48,7 @@ export class Login extends React.Component {
             localStorage.setItem('token', token)
             localStorage.setItem('username', username)
             localStorage.setItem('password', password)
-            localStorage.setItem('type', type)
+            localStorage.getItem('type', type)
             console.log(token)
             this.props.history.push('/Home')
             // axios
@@ -53,15 +61,42 @@ export class Login extends React.Component {
         }).catch(err => console.log(err))
 }
 
+// handleLogin = event => {
 
+//   event.preventDefault();
+
+//   axios
+//     .post('https://buildtipease.herokuapp.com/auth/users/login', this.state)
+//     .then(res => {
+//       console.log("handle login event RES", res)
+//       const {token, username, password,type,userInfo} = res.data
+//       localStorage.setItem('token', token);
+//       localStorage.setItem('username', username)
+//       localStorage.setItem('password', password)
+//       localStorage.getItem('type', type)
+//       console.log(token)
+//       console.log("USER ID",userInfo.id)
+//       this.setState({ userType: localStorage.getItem('type') })
+//       // this.props.geType(this.state.type);
+//       // this.props.getWorkers();
+//       if (this.state.type !== 'users') {
+//         return this.props.history.push(`/worker-profile/id`);
+//       } else {
+//         return this.props.history.push(`/users/${userInfo.id}`)
+//       }
+//     })
+//     .catch(err => console.log(err));     
+// };
 
   render() {
     return (
+      
       <div classNameName="page-login" style={loginpageStyle}>
-      <div className="ui centered grid container">
+      {/* <img src={logobg} style={{width:'50px'}}/> */}
+      <div className="ui centered grid container" >
         <div className="nine wide column">
-          <div className="ui icon warning message">
-              <i className="lock icon"></i>
+          <div className="ui icon warning message" style={{background:'#2185d0'}}>
+              <i className="lock icon" style={{color:'#5bc0be'}}></i>
               <div className="content">
                 <div className="header">
                   Must be Logged-In
@@ -83,13 +118,13 @@ export class Login extends React.Component {
               <div className="inline fields">
               <div className="field">
                 <div className="ui radio checkbox">
-                  <input type="radio" name="example2" checked="checked" />
+                  <input type="radio" id="users" name="users"  value={this.handleChanges}/>
                   <label>User</label>
                 </div>
               </div>
               <div className="field">
                 <div class="ui radio checkbox">
-                  <input type="radio" name="example2" />
+                  <input type="radio" id="serviceWorkers" name="serviceWorkers"  value={this.handleChanges}/>
                   <label>Service Worker</label>
                 </div>
               </div>

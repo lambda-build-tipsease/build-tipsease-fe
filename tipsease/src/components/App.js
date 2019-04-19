@@ -10,17 +10,21 @@ class App extends React.Component {
 
 
     render() {
+        console.log('APP JS PROPS',this.props)
         return (
             <div className="ui container">
-    
-            <Switch>
+            {/* {this.props.match.path === '/login' ? (<div><Link to="/login" component={Login}>Login</Link> <Link to="/register" component={Register}>Register</Link></div>) : (<div><Link to="/home" component={Home}>Home</Link> <Link to="/workerprofile" component={WorkerProfile}>WorkerProfile</Link></div>)} */}
+            
+            
+            
+            
             <Link to="/login" component={Login}>Login</Link>
-            <Link to="/home" component={Home}>Home</Link>
             <Link to="/register" component={Register}>Register</Link>
+            <Link to="/home" component={Home}>Home</Link>
             <Link to="/workerprofile" component={WorkerProfile}>WorkerProfile</Link>
-            </Switch>
             <Switch>
-            <Route path = "/register" component = {Register}/>
+
+            <Route path = "/register" component = {Register} />
             <Route path = "/login" component = {Login}/>
             
             <Route path = "/home" component = {Home}/>

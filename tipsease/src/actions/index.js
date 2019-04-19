@@ -45,7 +45,13 @@ export const FETCH_WORKER_FAILURE = 'FETCH_WORKER_FAILURE';
 export const ADDING_TIP_START = 'ADDING_TIP_START';
 export const ADDING_TIP_SUCCESS = 'ADDING_TIP_SUCCESS';
 export const ADDING_TIP_FAILURE = 'ADDING_TIP_FAILURE';
-//GETS SERVICE WORKER
+
+
+//LOGIN AS USER OR WORKER
+// export const 
+
+
+
 export const getServiceWorkers = url => dispatch => {
   dispatch({ type: FETCHING_SERVICE_WORKER });
   const token = localStorage.getItem("token");
@@ -109,10 +115,10 @@ export const getCustomers = id => dispatch => {
     axios
       .post("https://buildtipease.herokuapp.com/auth/users/register", users)
       .then(res => {
-        dispatch({ type: ADDING_SERVICE_WORKER_SUCCESS, payload: res.data });
+        dispatch({ type: ADDING_CUSTOMER_SUCCESS, payload: res.data });
       })
       .catch(err => {
-        dispatch({ type: ADDING_SERVICE_WORKER_ERROR, payload: err });
+        dispatch({ type: ADDING_CUSTOMER_ERROR, payload: err });
       });
   };
   //DELETES CUSTOMERS
@@ -165,15 +171,6 @@ export const getCustomers = id => dispatch => {
         });
       });
   };
-
-
-
-//GIVE(ADD) TIP TO WORKER
-export const addTip = (id,tip) => dispatch => {
-  dispatch({type:ADDING_TIP_START});
-    axios
-      .post('https://buildtipease.herokuapp.com/serviceWorkers/pay/:id')
-}
 
   //gets TYPE
   export const getType = type => {

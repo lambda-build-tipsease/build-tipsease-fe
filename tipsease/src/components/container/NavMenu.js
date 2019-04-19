@@ -19,7 +19,7 @@ class Navmenu extends React.Component {
 
         return (
             
-                <div className="ui secondary  menu">
+                <div className="ui secondary  menu" >
                 <a className="active item" style={colorTheme}>
                     Tipsease
                 </a>
