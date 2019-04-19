@@ -30,14 +30,15 @@ class WorkerProfile extends React.Component {
   render() {
     let { tip } = this.state;
     return (
-      <div className="container">
+      <div className="ui centered card" style={{ marginTop: "50px" }}>
+        {" "}
         <WorkerList
           {...this.props.serviceWorker}
           single={true}
           submitTip={this.submitTip}
         />
         <Modal open={this.state.modal}>
-          <SuccessModal {...this.props.serviceWorker} tipAmount={tip}/>
+          <SuccessModal {...this.props.serviceWorker} tipAmount={tip} />
         </Modal>
       </div>
     );
