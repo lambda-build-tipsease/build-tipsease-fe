@@ -1,10 +1,11 @@
 import React from 'react';
-import SearchBar from './SearchBar'
+import {Link} from 'react-router-dom';
+// import SearchBar from './SearchBar'
 
 
-const colorTheme = {
-    color: '#5bc0be'
-};
+// const colorTheme = {
+//     color: '#5bc0be'
+// };
 class Navmenu extends React.Component {
 
 
@@ -20,10 +21,10 @@ class Navmenu extends React.Component {
         return (
             
                 <div className="ui secondary  menu" style={{background:'#5bc0be'}}>
-                <a className="active item" style={{background:'#2185d0'}}>
+                <a className="active item" style={{background:'#2185d0'}} onClick={() => window.location = "/home"}>
                     Tipsease
                 </a>
-                <a className="item">
+                <a className="item" onClck={() => this.props.history.push(`/users/1`)}>
                     Profile
                 </a>
                 <a className="item">
@@ -36,7 +37,7 @@ class Navmenu extends React.Component {
                         <i className="search link icon"></i>
                     </div>
                     </div>
-                    <a className="ui item" onClick={this.logoutHandler}>
+                    <a to className="ui item" onClick={this.logoutHandler}>
                     Logout
                     </a>
                 </div>

@@ -10,7 +10,7 @@ class Register extends React.Component {
     fullName: "",
     username: "",
     password: "",
-    photoUrl: faker.image.avatar(),
+    photoUrl: faker.image.image(),
     serviceWorker: true,
     serviceType: ''
   };

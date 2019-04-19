@@ -1,15 +1,16 @@
-import React, { Children } from "react";
-import {connect} from 'react-redux';
+import React from "react";
+// import {connect} from 'react-redux';
 // import { withRouter } from "react-router";
-import { Route, Link } from "react-router-dom";
+// import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import Home from '../container/Home';
-import {addServiceWorkers,addCustomers, getType,getWorkers} from '../../actions';
+// import Home from '../container/Home';
+// import {addServiceWorkers,addCustomers, getType,getWorkers} from '../../actions';
 // import users from "./users";
 // import Register from '../Register/Register';
-import logo from './logo.png';
-import styled, {ThemeProvider} from 'styled-components';
-import theme from 'styled-theming';
+// import logo from './logo.png';
+// import styled, {ThemeProvider} from 'styled-components';
+// import theme from 'styled-theming';
 
 const loginpageStyle = {
   marginTop: '100px'
@@ -18,7 +19,7 @@ const loginpageStyle = {
 // const HeaderImage = styled.div`
 //   background-image: url(${logo})
 // `;
-const logobg = require('./logo.png');
+// const logobg = require('./logo.png');
 // const style = {background: 'url(./logo.png)'}
 
 export class Login extends React.Component {
@@ -91,7 +92,7 @@ export class Login extends React.Component {
   render() {
     return (
       
-      <div classNameName="page-login" style={loginpageStyle}>
+      <div className="page-login" style={loginpageStyle}>
       {/* <img src={logobg} style={{width:'50px'}}/> */}
       <div className="ui centered grid container" >
         <div className="nine wide column">
@@ -118,13 +119,13 @@ export class Login extends React.Component {
               <div className="inline fields">
               <div className="field">
                 <div className="ui radio checkbox">
-                  <input type="radio" id="users" name="users"  value={this.handleChanges}/>
+                  <input type="radio" name="example2" defaultChecked  />
                   <label>User</label>
                 </div>
               </div>
               <div className="field">
-                <div class="ui radio checkbox">
-                  <input type="radio" id="serviceWorkers" name="serviceWorkers"  value={this.handleChanges}/>
+                <div className="ui radio checkbox">
+                  <input type="radio" name="example2"/>
                   <label>Service Worker</label>
                 </div>
               </div>

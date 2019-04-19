@@ -2,7 +2,7 @@ import React from 'react'
 import WorkerList from './WorkerList';
 import { connect } from 'react-redux';
 import { getWorkerProfile } from '../../actions'
-
+import NavMenu from './NavMenu'
 const mapStateToProps = state => ({
     serviceWorker: state.serviceWorker,
     state
@@ -34,9 +34,12 @@ class WorkerProfile extends React.Component {
         console.log("THIS.PROPS SERVICEWORKER", this.props.serviceWorker)
         console.log(this.props)
         console.log("employee",emp)
-        return( <div className="ui centered card" style={{marginTop:'50px'}}>
+        return( <>
+        <NavMenu />
+        <div className="ui centered card" style={{marginTop:'50px'}}>
             <div><WorkerList {...this.props.serviceWorker} single={true} submitTip={this.submitTip}/></div>
             </div>
+            </>
         )}
 }
 

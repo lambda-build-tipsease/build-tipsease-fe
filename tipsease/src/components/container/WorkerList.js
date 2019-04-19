@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import {getWorkerProfile} from '../../actions';
+import React from 'react';
+import {Link} from 'react-router-dom';
+// import axios from 'axios';
+// import {getWorkerProfile} from '../../actions';
 
 
 function WorkersList(props){
@@ -26,7 +27,7 @@ return (
                         <img src={props.photoUrl} alt="user img"/>
                     </div>
                     <div className="content">
-                        <a className="header" onClick={handleClick}>{props.fullName}</a>
+                        <Link className="header" onClick={handleClick}>{props.fullName}</Link>
                         <div className="meta">
                         <span className="date">Rating: <strong></strong>{props.rating} stars</span>
                         </div>
@@ -35,10 +36,10 @@ return (
                         </div>
                     </div>
                     <div className="extra content" style={{background:'#5bc0be'}}>
-                        <a>
+                        <Link>
                         <i className="user icon"></i>
                         available
-                        </a><br />
+                        </Link><br />
                         <div>
                         {props.single && <div>Bio: {props.bio}</div>}
                         </div> <br />
@@ -52,7 +53,7 @@ return (
                         {props.single && <div>Work Place: {props.workplace}</div>}
                         </div> <br />
                         <div className="">
-                        {props.single && <div>TIP: <input style={{width:'100px', marginRight: '25px'}} onChange={value => props.submitTip(value)} /> <button className="ui inverted green button" stytle={{display:'flex'}} onClick={props.submitTip} style={{color:'#00000'}}> submit tip</button></div>}
+                        {props.single && <div>TIP: <input style={{width:'100px', marginRight: '25px',height:'35px'}} onChange={value => props.submitTip(value)} /> <button className="ui secondary button" onClick={props.submitTip} style={{color:'#00000', display:'flex',float:'right', height:'35px', alignContent:'center'}}> submit tip</button></div>}
                         </div> <br />
                     </div>
                     </div>
