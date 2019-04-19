@@ -34,84 +34,84 @@ import {
 } from "../actions";
 
 const initialState = {
-  serviceWorkers: [],
-  users: [],
-  error: "",
-  type: ""
-};
-
-const reducers = (state = initialState, action) => {
-  switch (action.type) {
-    case FETCHING_SERVICE_WORKER_SUCCESS:
-      return {
-        ...state,
-        serviceWorkers: action.payload
-      };
-    case FETCHING_SERVICE_WORKER_ERROR:
-      return {
-        ...state,
-        error: action.payload
-      };
-    case FETCHING_CUSTOMER_SUCCESS:
-      return {
-        ...state,
-        patrons: action.payload
-      };
-    case FETCHING_CUSTOMER_ERROR:
-      return {
-        ...state,
-        error: action.payload
-      };
-    case ADDING_SERVICE_WORKER:
-      return {
-        ...state,
-        type: "serviceWorkers",
-        error: ""
-      };
-    case ADDING_SERVICE_WORKER_SUCCESS:
-      return {
-        ...state,
-        username: action.payload,
-        password: false,
-        type: "serviceWorkers"
-      };
-    case ADDING_SERVICE_WORKER_ERROR:
-      return {
-        ...state,
-        error: action.payload
-      };
-    case GET_TYPE_SUCCESS:
-      return {
-        ...state,
-        userType: action.payload
-      };
-    case FETCH_WORKER_SUCCESS:
-      return {
-        ...state,
-        serviceWorker: action.payload
-      };
-    case SEND_TIP_SUCCESS:
-      return {
-        ...state,
-        tipped: action.payload
-      };
-    case SEND_TIP_FAILURE:
-      return {
-        ...state,
-        error: action.payload
-      };
-    case SEARCH:
-      return {
-        ...state,
-        search: action.payload
-      };
-    case FILTER:
-      return {
-        ...state,
-        filter: action.payload
-      };
-    default:
-      return state;
+    serviceWorkers: [],
+    users: [],
+    error: '',
+    type: ''
+  }
+  
+  const reducers = (state = initialState, action) => {
+    switch(action.type) {
+      case FETCHING_SERVICE_WORKER_SUCCESS:
+        return {
+          ...state,
+          serviceWorkers: action.payload
+        }
+      case FETCHING_SERVICE_WORKER_ERROR:
+        return {
+          ...state,
+          error: action.payload
+        }
+      case FETCHING_CUSTOMER_SUCCESS:
+        return {
+          ...state,
+          patrons: action.payload
+        }
+      case FETCHING_CUSTOMER_ERROR:
+        return {
+          ...state,
+          error: action.payload
+        }
+      case ADDING_SERVICE_WORKER:
+        return {
+          ...state,
+          type: 'serviceWorkers',
+          error: ''
+        }
+      case ADDING_SERVICE_WORKER_SUCCESS:
+        return {
+          ...state,
+          username: action.payload,
+          password: false,
+          type: 'serviceWorkers'
+        }
+      case ADDING_SERVICE_WORKER_ERROR:
+        return {
+          ...state,
+          error: action.payload
+        }
+      case GET_TYPE_SUCCESS:
+        return {
+          ...state,
+          userType: action.payload,
+        }
+      case FETCH_WORKER_SUCCESS:
+        return {
+          ...state,
+          serviceWorker: action.payload
+        }
+      case SEND_TIP_SUCCESS:
+        return {
+          ...state,
+          tipped: action.payload
+        };
+      case SEND_TIP_FAILURE:
+        return {
+          ...state,
+          error: action.payload
+        };
+      case SEARCH:
+        return {
+          ...state,
+          search: action.payload
+        };
+      case FILTER:
+        return {
+          ...state,
+          filter: action.payload
+        };
+      default:
+        return state;
   }
 };
 

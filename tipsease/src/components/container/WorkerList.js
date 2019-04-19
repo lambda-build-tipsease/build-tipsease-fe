@@ -14,41 +14,46 @@ function WorkersList(props) {
     let success = await props.submitTip(inputEl.current.value);
     console.log(success)
   };
-
+  
   return (
     <div className="ui card">
-      <div className="image">
-        <img src={props.photoUrl} alt="user img" />
-      </div>
-      <div className="content">
-        <a className="header" onClick={handleClick}>
-          {props.fullName}
-        </a>
-        <div className="meta">
-          <span className="date">{props.rating}</span>
-        </div>
-        <div className="description">{props.serviceType}</div>
-      </div>
-      <div className="extra content">
-        <a>
-          <i className="user icon" />
-          available
-        </a>
-        <div>{props.single && <div>{props.bio}</div>}</div>
-        <div>{props.single && <div>{props.tagline}</div>}</div>
-        <div>{props.single && <div>{props.timeAtJob}</div>}</div>
-        <div>{props.single && <div>{props.workplace}</div>}</div>
-        <div>
-          {props.single && (
-            <div>
-              TIP: <input ref={inputEl} />{" "}
-              <button onClick={handleSumbit}> submit tip</button>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
+                    <div className="image">
+                        <img src={props.photoUrl} alt="user img"/>
+                    </div>
+                    <div className="content">
+                        <a className="header" onClick={handleClick}>{props.fullName}</a>
+                        <div className="meta">
+                        <span className="date">{props.rating} rating</span>
+                        </div>
+                        <div className="description">
+                        {props.serviceType}
+                        </div>
+                    </div>
+                    <div className="extra content">
+                        <a>
+                        <i className="user icon"></i>
+                        available
+                        </a><br />
+                        <div>
+                        {props.single && <div>Bio: {props.bio}</div>}
+                        </div> <br />
+                        <div>
+                        {props.single && <div>Tagline: {props.tagline}</div>}
+                        </div> <br />
+                        <div>
+                        {props.single && <div>Time @ Job: {props.timeAtJob}</div>}
+                        </div> <br />
+                        <div>
+                        {props.single && <div>Work Place: {props.workplace}</div>}
+                        </div> <br />
+                        <div className="">
+                        {props.single && <div>TIP: <input ref={inputEl} style={{width:'100px', marginRight: '25px'}} /> <button className="ui inverted green button" stytle={{display:'flex'}} onClick={handleSumbit} style={{color:'#00000'}}>Submit Tip</button></div>}
+                        </div> <br />
+                    </div>
+                    </div>
+    
+    
+        )
+    }
 
 export default WorkersList;

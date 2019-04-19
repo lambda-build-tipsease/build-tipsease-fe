@@ -51,6 +51,9 @@ export const SEND_TIP_FAILURE = "SEND_TIP_FAILURE";
 export const SEARCH = "SEARCH";
 export const FILTER = "FILTER";
 
+export const ADDING_TIP_START = 'ADDING_TIP_START';
+export const ADDING_TIP_SUCCESS = 'ADDING_TIP_SUCCESS';
+export const ADDING_TIP_FAILURE = 'ADDING_TIP_FAILURE';
 //GETS SERVICE WORKER
 export const getServiceWorkers = url => dispatch => {
   dispatch({ type: FETCHING_SERVICE_WORKER });
@@ -230,3 +233,16 @@ export const filter = filterTerm => {
     payload: filterTerm
   }
 }
+
+//GIVE(ADD) TIP TO WORKER
+export const addTip = (id,tip) => dispatch => {
+  dispatch({type:ADDING_TIP_START});
+    axios
+      .post('https://buildtipease.herokuapp.com/serviceWorkers/pay/:id')
+}
+
+  //gets TYPE
+  export const getType = type => {
+    console.log(type);
+    return { type: GET_TYPE_SUCCESS, payload: type};
+  }
